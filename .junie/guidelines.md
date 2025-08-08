@@ -1,39 +1,70 @@
-# Project Guidelines
+# Guía del Proyecto (Angular 20, SSR, Zoneless)
 
-## Angular 19 Application
+Este proyecto está construido con Angular 20, renderizado del lado del servidor (SSR) y sin Zone.js (zoneless). Sigue estas pautas para mantener la coherencia, el rendimiento y la compatibilidad SSR.
 
-This project is built with Angular 19 and has the following key characteristics:
+## 1) SSR (Server-Side Rendering)
+- Proveedores SSR: usa `provideServerRendering()` en `app.config.server.ts` (ya configurado).
+- Hidratación en cliente: usa `provideClientHydration(withEventReplay(), withIncrementalHydration())` en `app.config.ts` (ya configurado).
+- Universal helpers: se usan `@ng-web-apis/universal` y cargadores específicos para SSR (por ejemplo, `TranslateServerLoader`).
+- Acceso a APIs del navegador: nunca accedas directamente a `window`, `document`, `navigator`, `localStorage`, etc. En su lugar:
+  - Inyecta `PLATFORM_ID` con `inject(PLATFORM_ID)` y comprueba `isPlatformBrowser(platformId)`.
+  - Añade además comprobaciones defensivas: `typeof window !== 'undefined'`.
+  - Envuelve librerías sólo de navegador con importaciones dinámicas dentro de bloques que sólo se ejecuten en el cliente.
+- Transferencia de estado (opcional): cuando haya fetch costosos en SSR, considera `TransferState` para evitar doble carga en cliente.
+- i18n en SSR: en servidor usa un `TranslateLoader` que lea del filesystem; en cliente, `TranslateHttpLoader` vía HTTP (ya implementado en este repo).
 
-### Server-Side Rendering (SSR)
-- The application uses Angular's Server-Side Rendering
-- All browser-specific code must be wrapped with `isPlatformBrowser(this.platformId)` checks
-- Avoid direct access to `window`, `document`, `navigator`, or other browser-specific APIs without proper checks
-- For browser-specific APIs, also check if they exist: `typeof window !== 'undefined'`, `typeof document !== 'undefined'`, etc.
-- Use dynamic imports for browser-only libraries
+## 2) Zoneless (sin Zone.js)
+- Habilitado con `provideZonelessChangeDetection()` en `app.config.ts`.
+- Eventos en plantillas deben usar el sufijo `.zoneless` (ej.: `(scroll.zoneless)="onScroll(...)"`).
+- Cambio de detección manual: cuando actualices estado desde callbacks externos, usa señales o `effect()` para notificar a la vista.
+- Evita patrones que dependan de Zone.js (p.ej., no confíes en que la vista se actualiza sola tras promesas/tiempos). Usa señales para estado reactivo.
 
-### Zoneless
-- The application is configured to run without Zone.js
-- Use the `.zoneless` suffix for event bindings in templates
-- Manually handle change detection when needed
-- Use signals for reactive state management
+## 3) Sintaxis moderna Angular 20
+- Control flow:
+  - `@if ... { } @else { }`
+  - `@for (item of list; track item.id) { } @empty { }`
+  - `@switch (...) { @case (...) { } }`
+  - `@defer { } @placeholder { } @loading { } @error { }` para cargas diferidas.
+- Standalone y DI moderna: usa `inject(...)` en vez de `constructor` donde sea apropiado.
+- Guards/Resolvers/Interceptors funcionales.
+- Inputs requeridos, señales (`signal`, `computed`, `effect`) para estado, y `toObservable`/`toSignal` cuando haga falta interoperar con RxJS.
 
-### Modern Angular Syntax
-- Use the new control flow syntax:
-  - `@if` instead of `*ngIf`
-  - `@for` instead of `*ngFor`
-  - `@switch` and `@case` instead of `*ngSwitch` and `*ngSwitchCase`
-  - `@empty` and `@defer` where appropriate
-- Use signals for reactive state management
-- Use functional guards and resolvers
+## 4) Rutas, división de código y cargas diferidas
+- Usa importaciones dinámicas en rutas: `loadComponent: () => import('...').then(m => m.X)` (ya presente en `app.routes.ts`).
+- Usa `@defer` en vistas para contenido pesado (ej.: mapas) con placeholders accesibles.
+- Nombra y organiza módulos/librerías pesadas para minimizar el JS inicial. Evita cargar librerías de navegador durante SSR.
 
-## Project Structure
-- `/src/components` - Application components
-- `/src/services` - Application services
-- `/src/app` - Core application files
-- `/public` - Static assets and i18n files
+## 5) Acceso seguro a almacenamiento y APIs del navegador
+- Envuelve `localStorage/sessionStorage` en servicios seguros para SSR (este repo expone un servicio `LocalStorage`).
+- Antes de acceder, valida entorno navegador con `isPlatformBrowser` y `typeof window !== 'undefined'`.
 
-## Development Guidelines
-- Always ensure code works in both browser and server environments
-- Test SSR functionality locally before submitting changes
-- Use signals for state management
-- Follow Angular's style guide for naming conventions and code organization
+## 6) i18n
+- Cliente: `TranslateHttpLoader` desde `/public/i18n/*.json`.
+- Servidor: `TranslateServerLoader` que lee del filesystem (ver `app.config.server.ts`).
+- Establece idioma por defecto y permite conmutarlo mediante estado con señales.
+
+## 7) Accesibilidad y UX
+- Usa atributos ARIA y roles apropiados (ej.: `role="application"` para mapas, `aria-label` en botones).
+- Mantén el foco y navegación por teclado en componentes interactivos (bottom sheets, diálogos, etc.).
+
+## 8) Rendimiento
+- Incremental Hydration y Event Replay ya están habilitados; evita mutaciones de DOM fuera de Angular.
+- Prefiere señales sobre `@Input()` mutables para evitar renders innecesarios.
+- Usa `track` en `@for` para listas.
+
+## 9) Estructura del proyecto
+- `/src/components` — Componentes de la app (standalone).
+- `/src/services` — Servicios/estado (señales, wrappers SSR-safe).
+- `/src/app` — Configuración core, rutas y raíz.
+- `/public` — Estáticos e i18n.
+
+## 10) Desarrollo y SSR local
+- Desarrollo SPA: `npm start` (sin SSR).
+- Build SSR: `npm run build` y luego `npm run serve:ssr:angular20` para servir SSR desde `dist/`.
+- Verifica siempre que:
+  - No hay errores de acceso a `window/document` en servidor.
+  - Las vistas hidratan sin errores en cliente.
+
+## 11) Estilo y lint
+- Sigue Angular Style Guide (nombres en PascalCase para componentes, sufijos adecuados, coherencia en señales/propiedades).
+- Usa ESLint del proyecto (`npm run lint` y `npm run lint:fix`).
