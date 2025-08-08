@@ -1,6 +1,6 @@
 # Angular19
 Base project for Web Applications:
-- [Angular 19](https://github.com/angular/angular-cli)
+- [Angular 20](https://github.com/angular/angular-cli)
   - SSR
   - Zoneless
   - OnPush and Standalone components
