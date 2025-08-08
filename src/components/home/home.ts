@@ -55,7 +55,9 @@ export class HomeComponent {
   protected readonly linkedin = signal(
     'https://www.linkedin.com/in/gabrimejia/',
   );
-  protected readonly instagram = signal('https://www.instagram.com/gabri.mejia/');
+  protected readonly instagram = signal(
+    'https://www.instagram.com/gabri.mejia/',
+  );
 
   protected readonly global = inject(GlobalData);
   private readonly platformId = inject(PLATFORM_ID);
@@ -161,6 +163,7 @@ export class HomeComponent {
       name: 'angular19',
       descriptionKey: 'home.projects.angular19.desc',
       url: 'https://github.com/endermejia/angular19',
+      example: 'https://angular-app-template.netlify.app',
       tags: ['Angular', 'TypeScript', 'SSR', 'Zoneless'],
     },
     {
@@ -195,7 +198,10 @@ export class HomeComponent {
     // Prevent the outer anchor (<a [href]="p.url">) from navigating when the example button is clicked
     if (evt) {
       // Cancel default behaviors first (e.g., link activation)
-      const e = evt as Event & { preventDefault?: () => void; stopImmediatePropagation?: () => void };
+      const e = evt as Event & {
+        preventDefault?: () => void;
+        stopImmediatePropagation?: () => void;
+      };
       e.preventDefault?.();
       // Stop immediate propagation (some UI libs re-dispatch clicks)
       e.stopImmediatePropagation?.();
