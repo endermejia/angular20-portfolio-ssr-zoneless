@@ -9,7 +9,9 @@ export const routes: Routes = [
   {
     path: 'profile',
     loadComponent: () =>
-      import('../components/profile/profile.component').then((m) => m.ProfileComponent),
+      import('../components/profile/profile.component').then(
+        (m) => m.ProfileComponent,
+      ),
   },
   {
     path: '',

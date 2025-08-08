@@ -14,12 +14,20 @@ interface TranslationData {
 
 // Custom TranslateLoader for SSR that loads translations from filesystem
 export class TranslateServerLoader implements TranslateLoader {
-  constructor(private prefix: string = 'i18n', private suffix: string = '.json') {}
+  constructor(
+    private prefix: string = 'i18n',
+    private suffix: string = '.json',
+  ) {}
 
   getTranslation(lang: string): Observable<TranslationData> {
     try {
       // During SSR, we need to load the translations from the filesystem
-      const path = join(process.cwd(), 'public', this.prefix, `${lang}${this.suffix}`);
+      const path = join(
+        process.cwd(),
+        'public',
+        this.prefix,
+        `${lang}${this.suffix}`,
+      );
       const content = readFileSync(path, 'utf8');
       return of(JSON.parse(content));
     } catch (error) {
@@ -41,8 +49,8 @@ const serverConfig: ApplicationConfig = {
     // Override the TranslateLoader for server-side rendering
     {
       provide: TranslateLoader,
-      useFactory: translateServerLoaderFactory
-    }
+      useFactory: translateServerLoaderFactory,
+    },
   ],
 };
 

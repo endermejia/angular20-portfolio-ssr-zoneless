@@ -1,4 +1,8 @@
-<header tuiNavigationHeader class="flex items-center justify-between sm:gap-4" ngSkipHydration>
+<header
+  tuiNavigationHeader
+  class="flex items-center justify-between sm:gap-4"
+  ngSkipHydration
+>
   <div class="flex items-center gap-2" ngSkipHydration>
     <button
       title="{{ 'Menu' | translate }}"
@@ -41,7 +45,10 @@
       />
       <ng-template #search>
         <tui-search-results [results]="results$ | async" ngSkipHydration>
-          <tui-search-history [popular]="globalService.searchPopular()" ngSkipHydration />
+          <tui-search-history
+            [popular]="globalService.searchPopular()"
+            ngSkipHydration
+          />
           <ng-template let-item>
             <a tuiCell [href]="item.href" ngSkipHydration>
               <tui-avatar [src]="item.icon || '@tui.file'" ngSkipHydration />
@@ -61,7 +68,9 @@
       class="flex justify-center items-center gap-2"
       ngSkipHydration
     >
-      <span class="hidden sm:block" ngSkipHydration>{{ globalService.user().name }}</span>
+      <span class="hidden sm:block" ngSkipHydration>{{
+        globalService.user().name
+      }}</span>
       <tui-avatar [src]="globalService.user().picture" ngSkipHydration />
     </button>
   </div>
@@ -71,7 +80,13 @@
     @for (group of globalService.settings() | keyvalue; track group.key) {
       <tui-opt-group [label]="group.key | translate" ngSkipHydration>
         @for (item of group.value; track item.name) {
-          <button tuiOption type="button" (click)="onClick(item)" class="gap-2" ngSkipHydration>
+          <button
+            tuiOption
+            type="button"
+            (click)="onClick(item)"
+            class="gap-2"
+            ngSkipHydration
+          >
             <tui-avatar [src]="item.icon || '@tui.file'" ngSkipHydration />
             {{ item.name | translate }}
           </button>
