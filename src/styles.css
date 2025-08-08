@@ -6,6 +6,48 @@ tui-bottom-sheet {
   z-index: 9999 !important;
 }
 
-.leaflet-container {
-  z-index: 1;
+/* Neon border utility for section cards (subtle, theme-aware) */
+.neon-border {
+  /* Try to use a UI accent variable if present; fallback to a pleasant cyan */
+  --_neon: var(--tui-accent, #00e7ff);
+  border-color: var(--_neon) !important;
+  /* soft outer glow; color-mix improves subtlety where supported */
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--_neon) 25%, transparent),
+    0 0 10px color-mix(in oklab, var(--_neon) 35%, transparent),
+    0 0 22px color-mix(in oklab, var(--_neon) 25%, transparent);
 }
+
+.neon-border:hover,
+.neon-border:focus-visible {
+  border-color: var(--_neon) !important;
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--_neon) 35%, transparent),
+    0 0 14px color-mix(in oklab, var(--_neon) 55%, transparent),
+    0 0 30px color-mix(in oklab, var(--_neon) 40%, transparent);
+}
+
+
+/* Neon color helpers: set --_neon to desired hue per section */
+.neon-cyan { --_neon: #00e7ff; }
+.neon-pink { --_neon: #ff4dff; }
+.neon-purple { --_neon: #a855f7; }
+.neon-amber { --_neon: #f59e0b; }
+.neon-green { --_neon: #22c55e; }
+
+/* Inline skill icons */
+.skill-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: text-bottom;
+  margin-right: 0.5rem; /* 8px */
+  border-radius: 3px; /* soften sharp squares like TS */
+}
+
+/* Section-scoped neon colors */
+#profile .neon-border { --_neon: #00e7ff; }       /* cyan */
+#experience .neon-border { --_neon: #ff4dff; }    /* pink */
+#certifications .neon-border { --_neon: #a855f7; }/* purple */
+#projects .neon-border { --_neon: #f59e0b; }      /* amber */
+#contact .neon-border { --_neon: #22c55e; }       /* green */

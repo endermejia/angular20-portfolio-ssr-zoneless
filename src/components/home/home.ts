@@ -1,280 +1,216 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  ViewChild,
   inject,
-  PLATFORM_ID,
   signal,
-  WritableSignal,
-  AfterViewInit,
-  ChangeDetectorRef,
+  computed,
+  PLATFORM_ID,
 } from '@angular/core';
+import { TuiButton } from '@taiga-ui/core';
+import { TuiAvatar } from '@taiga-ui/kit';
+import { GlobalData } from '../../services';
+import { TranslatePipe } from '@ngx-translate/core';
 import { isPlatformBrowser } from '@angular/common';
-import { TuiBottomSheet } from '@taiga-ui/addon-mobile';
-import { TuiButton, TuiLoader, TuiTitle } from '@taiga-ui/core';
-import { TuiHeader } from '@taiga-ui/layout';
-import { TranslateService } from '@ngx-translate/core';
-import { GlobalData, MapClient, WeatherData } from '../../services';
-// Import types only, not the actual library
-import type * as L from 'leaflet';
 
-// Define interface for scroll event target
-interface ScrollEventTarget {
-  clientHeight: number;
-  scrollTop: number;
+interface Experience {
+  company: string;
+  role: string;
+  employment: string;
+  start: string; // e.g., "jun. 2025"
+  end: string; // e.g., "actualidad" or "may. 2024"
+  duration?: string; // e.g., "3 meses"
+  location?: string; // e.g., "En remoto"
+  descriptionKey?: string; // i18n key for long description
+  skills?: string[]; // list of skills labels
+}
+
+interface Certification {
+  title: string;
+  issuer: string;
+  issueDate: string; // e.g., "sept. 2020"
+  credentialUrl?: string;
+  logo?: string; // image url
+  skills?: string[]; // translation keys for skill chips
+}
+
+interface Project {
+  name: string;
+  descriptionKey: string; // i18n key for description
+  url: string; // optional external link
+  tags?: string[]; // simple tags like tech stack
+  example?: string;
 }
 
 @Component({
   selector: 'app-home',
-  imports: [TuiBottomSheet, TuiButton, TuiTitle, TuiHeader, TuiLoader],
+  imports: [TuiButton, TuiAvatar, TranslatePipe],
   templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MapClient],
   host: {
-    class: 'flex grow',
+    class: 'flex grow overflow-auto',
   },
 })
-export class HomeComponent implements AfterViewInit {
-  @ViewChild('buttons')
-  protected readonly button?: ElementRef<HTMLElement>;
-  protected readonly stops = ['112px'] as const;
+export class HomeComponent {
+  protected readonly github = signal('https://github.com/endermejia');
+  protected readonly linkedin = signal(
+    'https://www.linkedin.com/in/gabrimejia/',
+  );
+  protected readonly instagram = signal('https://www.instagram.com/gabri.mejia/');
 
-  // Properties for the bottom-sheet content using signals
-  protected locationName: WritableSignal<string> = signal('');
-  protected locationDetails: WritableSignal<
-    { label: string; value: string }[]
-  > = signal([]);
-  protected locationDescription: WritableSignal<string> = signal('');
-  protected mapUrl: WritableSignal<string> = signal('');
-  protected websiteUrl: WritableSignal<string> = signal('');
-  protected weatherData: WritableSignal<WeatherData | null> = signal(null);
-
-  // Signal to control the visibility of the bottom-sheet and buttons
-  protected showBottomSheet: WritableSignal<boolean> = signal(false);
-
-  private map?: L.Map;
+  protected readonly global = inject(GlobalData);
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly translate = inject(TranslateService);
-  private readonly cdr = inject(ChangeDetectorRef);
-  private readonly globalData = inject(GlobalData);
-  private readonly mapClient = inject(MapClient);
 
-  ngAfterViewInit(): void {
-    // Only proceed in the browser environment
-    if (!isPlatformBrowser(this.platformId)) {
-      console.log('Not in browser environment, skipping map initialization');
-      return;
-    }
-
-    // Use setTimeout to ensure DOM is fully rendered
-    setTimeout(() => {
-      // Initialize the map
-      this.initializeMap();
-    }, 0);
-  }
-
-  private async initializeMap(retryCount = 0): Promise<void> {
-    // Only proceed in the browser environment
-    if (!isPlatformBrowser(this.platformId)) {
-      console.log('Not in browser environment, skipping map initialization');
-      return;
-    }
-
-    // Ensure the map container exists before proceeding
-    const mapContainer = document.getElementById('map');
-    if (!mapContainer) {
-      console.error('Map container not found, delaying initialization');
-      if (retryCount < 3) {
-        setTimeout(() => {
-          this.initializeMap(retryCount + 1);
-        }, 500);
-      }
-      return;
-    }
-
-    console.log(`Initializing map (attempt ${retryCount + 1})...`);
-
-    try {
-      // Use the enhanced method to ensure Leaflet is fully loaded
-      const leaflet = await this.mapClient.ensureLeafletLoaded();
-
-      if (!leaflet) {
-        console.error('Failed to load Leaflet after multiple attempts');
-        this.handleLeafletLoadError(retryCount);
-        return;
-      }
-
-      // Double-check Map constructor is available
-      if (!leaflet.Map) {
-        console.error('Leaflet Map constructor not available after loading');
-        this.handleLeafletLoadError(retryCount);
-        return;
-      }
-
-      // Initialize the map using the MapService
-      this.map = this.mapClient.initMap('map');
-
-      if (!this.map) {
-        console.error('Failed to initialize map');
-        this.handleLeafletLoadError(retryCount);
-        return;
-      }
-
-      // Set default location (Spain)
-      this.mapClient.useDefaultLocation();
-
-      // Add weather markers based on the zoom level
-      this.addWeatherMarkers();
-
-      // Set up the map change event handler (zoom and pan)
-      this.mapClient.updateMarkersOnMapChange((weatherData) =>
-        this.handleWeatherMarkerClick(weatherData),
-      );
-
-      // Trigger change detection
-      this.cdr.markForCheck();
-    } catch (error) {
-      console.error('Error initializing Leaflet:', error);
-      this.handleLeafletLoadError(retryCount);
-    }
-  }
-
-  private handleLeafletLoadError(retryCount: number): void {
-    if (retryCount < 3) {
-      // Maximum 3 retry attempts
-      console.log(`Retrying Leaflet initialization (${retryCount + 1}/3)...`);
-      // Wait a bit longer on each retry
-      setTimeout(
-        () => {
-          // Try to reload Leaflet using the MapService
-          this.mapClient.reloadLeaflet('map').then(() => {
-            // After reloading, try to initialize the map again
-            this.initializeMap(retryCount + 1);
-          });
-        },
-        1000 * (retryCount + 1),
-      ); // Increasing delay: 1s, 2s, 3s
-    } else {
-      console.error('Failed to initialize Leaflet after multiple attempts');
-    }
-  }
-
-  /**
-   * Adds weather markers to the map
-   */
-  private addWeatherMarkers(): void {
-    this.mapClient.addWeatherMarkers((weatherData) =>
-      this.handleWeatherMarkerClick(weatherData),
-    );
-  }
-
-  /**
-   * Handles click events on weather markers
-   * @param weatherData The weather data for the clicked location
-   */
-  private handleWeatherMarkerClick(weatherData: WeatherData): void {
-    if (!weatherData) return;
-
-    console.log(
-      'Marker clicked, updating bottom-sheet with weather data:',
-      weatherData,
-    );
-
-    const locationName =
-      weatherData.location[`name_${this.globalData.selectedLanguage()}`] ??
-      weatherData.location.name;
-
-    console.log(locationName);
-
-    // Update the weatherData signal
-    this.weatherData.set(weatherData);
-
-    // Update location info with weather data
-    this.updateLocationInfo(
-      locationName,
-      [
-        {
-          label: this.translate.instant('location.details.temperature'),
-          value: `${weatherData.temperature}°C`,
-        },
-        {
-          label: this.translate.instant('location.details.description'),
-          value: weatherData.description,
-        },
-        {
-          label: this.translate.instant('location.details.humidity'),
-          value: `${weatherData.humidity}%`,
-        },
-        {
-          label: this.translate.instant('location.details.wind'),
-          value: `${weatherData.windSpeed} km/h`,
-        },
+  // Professional experience (Spanish content with i18n descriptions)
+  protected readonly experiences = signal<Experience[]>([
+    {
+      company: 'Inetum',
+      role: 'Angular Developer',
+      employment: 'Jornada completa',
+      start: 'jun. 2025',
+      end: 'actualidad',
+      duration: '',
+      location: 'En remoto',
+      descriptionKey: 'home.experience.inetum',
+      skills: [
+        'Angular',
+        'TypeScript',
+        'SSR',
+        'Zoneless',
+        'Taiga UI',
+        'Signals',
+        'RxJS',
+        'i18n',
       ],
-      `${weatherData.description} en ${weatherData.location.name} con una temperatura de ${weatherData.temperature}°C.`,
-    );
+    },
+    {
+      company: 'CONVOTIS Iberia',
+      role: 'Angular Developer',
+      employment: 'Jornada completa',
+      start: 'jun. 2024',
+      end: 'jun. 2025',
+      duration: '1 año 1 mes',
+      location: 'En remoto',
+      descriptionKey: 'home.experience.convotis',
+      skills: ['Angular', 'TypeScript', 'PrimeNG', 'Signals', 'RxJS'],
+    },
+    {
+      company: 'Clavei - CLAVE INFORMATICA S.L.',
+      role: 'Angular Developer',
+      employment: 'Jornada completa',
+      start: 'sept. 2023',
+      end: 'may. 2024',
+      duration: '9 meses',
+      descriptionKey: 'home.experience.clavei',
+      skills: ['SASS', 'HTML5', 'Angular', 'RxJS'],
+    },
+    {
+      company: 'Ricoh España',
+      role: 'Senior Frontend Developer',
+      employment: 'Jornada completa',
+      start: 'jul. 2022',
+      end: 'sept. 2023',
+      duration: '1 año 3 meses',
+      descriptionKey: 'home.experience.ricoh',
+      skills: ['SASS', 'HTML5', 'Angular', 'TypeScript'],
+    },
+    {
+      company: 'NTT DATA',
+      role: 'Frontend Developer',
+      employment: 'Jornada completa',
+      start: 'dic. 2019',
+      end: 'jul. 2022',
+      duration: '2 años 8 meses',
+      location: 'Alicante y alrededores',
+      descriptionKey: 'home.experience.nttdata',
+      skills: ['SASS', 'HTML5', 'Angular', 'RxJS'],
+    },
+  ]);
 
-    // Set map URL for Google Maps
-    this.mapUrl.set(
-      `https://www.google.com/maps/search/?api=1&query=${weatherData.location.latitude},${weatherData.location.longitude}`,
-    );
+  // Certifications
+  protected readonly certifications = signal<Certification[]>([
+    {
+      title: 'JavaScript Algorithms and Data Structures',
+      issuer: 'freeCodeCamp',
+      issueDate: 'sept. 2020',
+      credentialUrl:
+        'https://www.freecodecamp.org/certification/endermejia/javascript-algorithms-and-data-structures',
+      logo: 'https://design-style-guide.freecodecamp.org/img/fcc_secondary_small.svg',
+      skills: ['skill.javascript'],
+    },
+    {
+      title: 'Responsive Web Design',
+      issuer: 'freeCodeCamp',
+      issueDate: 'sept. 2020',
+      credentialUrl:
+        'https://www.freecodecamp.org/certification/endermejia/responsive-web-design',
+      logo: 'https://design-style-guide.freecodecamp.org/img/fcc_primary_small.svg',
+      skills: ['skill.webdev'],
+    },
+  ]);
 
-    // Show the bottom-sheet and buttons
-    this.showBottomSheet.set(true);
+  // Theme-aware FCC logo for light/dark themes
+  protected readonly fccLogo = computed(() =>
+    this.global.selectedTheme() === 'dark'
+      ? 'https://design-style-guide.freecodecamp.org/img/fcc_primary_small.svg'
+      : 'https://design-style-guide.freecodecamp.org/img/fcc_secondary_small.svg',
+  );
 
-    // Trigger change detection
-    this.cdr.markForCheck();
-  }
+  // Projects
+  protected readonly projects = signal<Project[]>([
+    {
+      name: 'angular19',
+      descriptionKey: 'home.projects.angular19.desc',
+      url: 'https://github.com/endermejia/angular19',
+      tags: ['Angular', 'TypeScript', 'SSR', 'Zoneless'],
+    },
+    {
+      name: 'angular20-portfolio-ssr-zoneless',
+      descriptionKey: 'home.projects.angular20.desc',
+      url: 'https://github.com/endermejia/angular20-portfolio-ssr-zoneless',
+      tags: ['Angular', 'TypeScript', 'SSR', 'Zoneless'],
+    },
+    {
+      name: 'Club Escalada Costa Blanca',
+      descriptionKey: 'home.projects.clubescalada.desc',
+      url: 'https://github.com/endermejia/clubescaladacostablanca',
+      example: 'https://www.clubescaladacostablanca.com/#/blog',
+      tags: ['Angular', 'TypeScript', 'SSR', 'Zoneless'],
+    },
+    {
+      name: 'coffee-management',
+      descriptionKey: 'home.projects.coffee.desc',
+      url: 'https://github.com/endermejia/coffee-management',
+      tags: ['React', 'TypeScript', 'Redux', 'Redux Toolkit', 'Tailwind CSS'],
+    },
+    {
+      name: 'astro-photographer',
+      descriptionKey: 'home.projects.astro.desc',
+      url: 'https://github.com/endermejia/astro-photographer',
+      example: 'https://nhoa-noir.netlify.app/#home',
+      tags: ['Astro', 'SASS', 'HTML5', 'TypeScript'],
+    },
+  ]);
 
-  // Helper method to update location info in the bottom-sheet
-  private updateLocationInfo(
-    name: string,
-    details: { label: string; value: string }[],
-    description: string,
-  ): void {
-    // Update signals with new values
-    this.locationName.set(name);
-    this.locationDetails.set(details);
-    this.locationDescription.set(description);
-
-    // Update map URL if lat/lng are available
-    const latValue = details.find(
-      (d) => d.label === this.translate.instant('location.details.latitude'),
-    )?.value;
-    const lngValue = details.find(
-      (d) => d.label === this.translate.instant('location.details.longitude'),
-    )?.value;
-
-    if (latValue && lngValue) {
-      this.mapUrl.set(`https://www.google.com/maps?q=${latValue},${lngValue}`);
+  protected openExample(url?: string, evt?: Event) {
+    // Prevent the outer anchor (<a [href]="p.url">) from navigating when the example button is clicked
+    if (evt) {
+      // Cancel default behaviors first (e.g., link activation)
+      const e = evt as Event & { preventDefault?: () => void; stopImmediatePropagation?: () => void };
+      e.preventDefault?.();
+      // Stop immediate propagation (some UI libs re-dispatch clicks)
+      e.stopImmediatePropagation?.();
+      // And stop regular propagation as a fallback
+      if (typeof evt.stopPropagation === 'function') {
+        evt.stopPropagation();
+      }
     }
-
-    // Set default website URL
-    this.websiteUrl.set('https://www.openstreetmap.org/about');
-  }
-
-  /**
-   * Handles the event target from scroll events
-   * @param target The event target to be cast to ScrollEventTarget
-   * @returns The event target as ScrollEventTarget
-   */
-  protected handleScrollEvent(target: EventTarget | null): ScrollEventTarget {
-    return target as unknown as ScrollEventTarget;
-  }
-
-  /**
-   * Handles scroll events from the bottom sheet
-   * @param target The scroll event target with clientHeight and scrollTop properties
-   */
-  protected onScroll({ clientHeight, scrollTop }: ScrollEventTarget): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    const offset = Number.parseInt(this.stops[0], 10);
-    const top = Math.min(scrollTop, clientHeight - offset);
-    const transform = `translate3d(0, ${-top}px, 0)`;
-
-    if (this.button?.nativeElement) {
-      this.button.nativeElement.style.setProperty('transform', transform);
+    if (!url) return;
+    if (typeof window !== 'undefined' && isPlatformBrowser(this.platformId)) {
+      window.open(url, '_blank', 'noopener,noreferrer');
     }
+  }
+
+  constructor() {
+    this.global.headerTitle.set('Portfolio');
   }
 }

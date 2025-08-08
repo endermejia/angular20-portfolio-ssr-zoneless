@@ -77,6 +77,20 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
+## Deploying to Netlify
+
+This project is configured for SSR on Netlify using the official Netlify Angular Runtime.
+
+Steps:
+- Connect this repository to Netlify.
+- Ensure the build command is: `npm run build`.
+- Publish directory: `dist/angular20/browser`.
+- Netlify will detect `@netlify/angular-runtime` from `netlify.toml` and configure SSR automatically.
+
+Notes:
+- No custom redirects are needed; the plugin manages them for SSR and CSR fallback.
+- The server bundle is built to `dist/angular20/server` by Angular.
+
 ## Notes on Server-Side Rendering (SSR)
 
 When running the application with SSR, you may see the following message in the console:

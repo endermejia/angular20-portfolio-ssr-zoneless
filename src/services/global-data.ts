@@ -41,14 +41,14 @@ export class GlobalData {
   private localStorage = inject(LocalStorage);
   protected readonly flagPipe = new TuiFlagPipe();
 
-  headerTitle: WritableSignal<string> = signal('Angular20');
+  headerTitle: WritableSignal<string> = signal('Portfolio');
   user: WritableSignal<User> = signal({
-    name: 'Gabri Mejía',
-    picture: 'https://gabriel-mejia.com/assets/profile.webp',
+    name: 'Gabriel Mejía',
+    picture: 'https://avatars.githubusercontent.com/u/55515925?v=4',
   });
 
-  selectedLanguage: WritableSignal<'es' | 'en'> = signal('es');
-  selectedTheme: WritableSignal<'light' | 'dark'> = signal('light');
+  selectedLanguage: WritableSignal<'es' | 'en'> = signal('en');
+  selectedTheme: WritableSignal<'light' | 'dark'> = signal('dark');
 
   // Computed signal for Taiga UI language based on selectedLanguage
   tuiLanguage: Signal<
@@ -62,21 +62,59 @@ export class GlobalData {
   drawer: WritableSignal<OptionsData> = signal({
     Navigation: [
       {
-        name: 'Map',
-        icon: '@tui.map',
-        fn: (item: OptionsItem) => console.log(item.name),
+        name: 'Home',
+        icon: '@tui.home',
+        fn: () => {
+          if (typeof window !== 'undefined') {
+            document
+              ?.querySelector('#profile')
+              ?.scrollIntoView({ behavior: 'smooth' });
+          }
+        },
       },
       {
-        name: 'Zones',
-        icon: '@tui.mountain',
-        fn: (item: OptionsItem) => console.log(item.name),
+        name: 'Experience',
+        icon: '@tui.briefcase',
+        fn: () => {
+          if (typeof window !== 'undefined') {
+            document
+              ?.querySelector('#experience')
+              ?.scrollIntoView({ behavior: 'smooth' });
+          }
+        },
       },
-    ],
-    Logbook: [
       {
-        name: 'Crags',
-        icon: '@tui.signpost',
-        fn: (item: OptionsItem) => console.log(item.name),
+        name: 'Certifications',
+        icon: '@tui.file',
+        fn: () => {
+          if (typeof window !== 'undefined') {
+            document
+              ?.querySelector('#certifications')
+              ?.scrollIntoView({ behavior: 'smooth' });
+          }
+        },
+      },
+      {
+        name: 'Projects',
+        icon: '@tui.layers',
+        fn: () => {
+          if (typeof window !== 'undefined') {
+            document
+              ?.querySelector('#projects')
+              ?.scrollIntoView({ behavior: 'smooth' });
+          }
+        },
+      },
+      {
+        name: 'Contact',
+        icon: '@tui.send',
+        fn: () => {
+          if (typeof window !== 'undefined') {
+            document
+              ?.querySelector('#contact')
+              ?.scrollIntoView({ behavior: 'smooth' });
+          }
+        },
       },
     ],
   });
@@ -96,43 +134,42 @@ export class GlobalData {
         fn: () => this.switchTheme(),
       },
     ],
-    account: [
-      {
-        name: 'settings.profile',
-        icon: '@tui.user-round',
-        fn: () => {
-          this.router.navigate(['/profile']);
-        },
-      },
-      {
-        name: 'settings.security',
-        icon: '@tui.shield',
-        fn: (item: OptionsItem) => console.log(item.name),
-      },
-    ],
   }));
 
-  searchPopular: WritableSignal<string[]> = signal(['Onil', 'El Tormo']);
+  searchPopular: WritableSignal<string[]> = signal(['GitHub', 'LinkedIn']);
   searchData: WritableSignal<SearchData> = signal({
-    Zones: [
+    Social: [
       {
-        title: 'Onil',
-        href: 'https://www.example.com',
-        icon: '@tui.mountain',
+        title: 'GitHub',
+        href: 'https://github.com/endermejia',
+        icon: '@tui.github',
+      },
+      {
+        title: 'LinkedIn',
+        href: 'https://www.linkedin.com/in/gabrimejia/',
+        icon: '@tui.linkedin',
       },
     ],
-    Crags: [
+    Portfolio: [
       {
-        title: 'El Tormo',
-        href: 'https://www.example.com',
-        icon: '@tui.signpost',
+        title: 'Experience',
+        href: '#experience',
+        icon: '@tui.briefcase',
       },
-    ],
-    Routes: [
       {
-        title: 'Speedy Gonzales',
-        href: 'https://www.example.com',
-        icon: '@tui.route',
+        title: 'Certifications',
+        href: '#certifications',
+        icon: '@tui.file',
+      },
+      {
+        title: 'Projects',
+        href: '#projects',
+        icon: '@tui.layers',
+      },
+      {
+        title: 'Contact',
+        href: '#contact',
+        icon: '@tui.send',
       },
     ],
   });

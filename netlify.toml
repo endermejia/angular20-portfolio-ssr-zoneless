@@ -1,8 +1,6 @@
 [build]
   publish = "dist/angular20/browser"
-  command = "npm run build -- --configuration production"
+  command = "npm run build"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.csr.html"
-  status = 200
+[[plugins]]
+  package = "@netlify/angular-runtime"
