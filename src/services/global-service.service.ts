@@ -41,7 +41,7 @@ export class GlobalServiceService {
   private localStorage = inject(LocalStorageService);
   protected readonly flagPipe = new TuiFlagPipe();
 
-  headerTitle: WritableSignal<string> = signal('Angular19');
+  headerTitle: WritableSignal<string> = signal('Angular20');
   user: WritableSignal<User> = signal({
     name: 'Gabri Mejía',
     picture: 'https://gabriel-mejia.com/assets/profile.webp',

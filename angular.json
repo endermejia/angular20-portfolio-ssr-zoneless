@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular19": {
+    "angular20": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -22,7 +22,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular19",
+            "outputPath": "dist/angular20",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [],
@@ -79,10 +79,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular19:build:production"
+              "buildTarget": "angular20:build:production"
             },
             "development": {
-              "buildTarget": "angular19:build:development"
+              "buildTarget": "angular20:build:development"
             }
           },
           "defaultConfiguration": "development"

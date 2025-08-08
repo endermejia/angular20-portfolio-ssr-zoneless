@@ -1,5 +1,5 @@
 [build]
-  publish = "dist/angular19/browser"
+  publish = "dist/angular20/browser"
   command = "npm run build -- --configuration production"
 
 [[redirects]]

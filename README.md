@@ -1,4 +1,4 @@
-# Angular19
+# Angular20
 Base project for Web Applications:
 - [Angular 20](https://github.com/angular/angular-cli)
   - SSR

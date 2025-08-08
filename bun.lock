@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "angular19",
+      "name": "angular20",
       "dependencies": {
         "@angular/animations": "^19.2.1",
         "@angular/cdk": "^19.2.1",
