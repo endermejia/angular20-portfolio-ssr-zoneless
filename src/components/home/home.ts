@@ -15,7 +15,7 @@ import { TuiBottomSheet } from '@taiga-ui/addon-mobile';
 import { TuiButton, TuiLoader, TuiTitle } from '@taiga-ui/core';
 import { TuiHeader } from '@taiga-ui/layout';
 import { TranslateService } from '@ngx-translate/core';
-import { GlobalServiceService, MapService, WeatherData } from '../../services';
+import { GlobalData, MapClient, WeatherData } from '../../services';
 // Import types only, not the actual library
 import type * as L from 'leaflet';
 
@@ -28,9 +28,9 @@ interface ScrollEventTarget {
 @Component({
   selector: 'app-home',
   imports: [TuiBottomSheet, TuiButton, TuiTitle, TuiHeader, TuiLoader],
-  templateUrl: './home.component.html',
+  templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [MapService],
+  providers: [MapClient],
   host: {
     class: 'flex grow',
   },
@@ -57,8 +57,8 @@ export class HomeComponent implements AfterViewInit {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly translate = inject(TranslateService);
   private readonly cdr = inject(ChangeDetectorRef);
-  private readonly globalService = inject(GlobalServiceService);
-  private readonly mapService = inject(MapService);
+  private readonly globalData = inject(GlobalData);
+  private readonly mapClient = inject(MapClient);
 
   ngAfterViewInit(): void {
     // Only proceed in the browser environment
@@ -97,7 +97,7 @@ export class HomeComponent implements AfterViewInit {
 
     try {
       // Use the enhanced method to ensure Leaflet is fully loaded
-      const leaflet = await this.mapService.ensureLeafletLoaded();
+      const leaflet = await this.mapClient.ensureLeafletLoaded();
 
       if (!leaflet) {
         console.error('Failed to load Leaflet after multiple attempts');
@@ -113,7 +113,7 @@ export class HomeComponent implements AfterViewInit {
       }
 
       // Initialize the map using the MapService
-      this.map = this.mapService.initMap('map');
+      this.map = this.mapClient.initMap('map');
 
       if (!this.map) {
         console.error('Failed to initialize map');
@@ -122,13 +122,13 @@ export class HomeComponent implements AfterViewInit {
       }
 
       // Set default location (Spain)
-      this.mapService.useDefaultLocation();
+      this.mapClient.useDefaultLocation();
 
       // Add weather markers based on the zoom level
       this.addWeatherMarkers();
 
       // Set up the map change event handler (zoom and pan)
-      this.mapService.updateMarkersOnMapChange((weatherData) =>
+      this.mapClient.updateMarkersOnMapChange((weatherData) =>
         this.handleWeatherMarkerClick(weatherData),
       );
 
@@ -148,7 +148,7 @@ export class HomeComponent implements AfterViewInit {
       setTimeout(
         () => {
           // Try to reload Leaflet using the MapService
-          this.mapService.reloadLeaflet('map').then(() => {
+          this.mapClient.reloadLeaflet('map').then(() => {
             // After reloading, try to initialize the map again
             this.initializeMap(retryCount + 1);
           });
@@ -164,7 +164,7 @@ export class HomeComponent implements AfterViewInit {
    * Adds weather markers to the map
    */
   private addWeatherMarkers(): void {
-    this.mapService.addWeatherMarkers((weatherData) =>
+    this.mapClient.addWeatherMarkers((weatherData) =>
       this.handleWeatherMarkerClick(weatherData),
     );
   }
@@ -182,7 +182,7 @@ export class HomeComponent implements AfterViewInit {
     );
 
     const locationName =
-      weatherData.location[`name_${this.globalService.selectedLanguage()}`] ??
+      weatherData.location[`name_${this.globalData.selectedLanguage()}`] ??
       weatherData.location.name;
 
     console.log(locationName);

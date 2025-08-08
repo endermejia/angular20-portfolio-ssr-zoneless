@@ -9,7 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { TuiFlagPipe } from '@taiga-ui/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LocalStorageService } from './local-storage.service';
+import { LocalStorage } from './local-storage';
 import { TUI_ENGLISH_LANGUAGE, TUI_SPANISH_LANGUAGE } from '@taiga-ui/i18n';
 
 interface User {
@@ -35,10 +35,10 @@ export type OptionsData = Record<string, readonly OptionsItem[]>;
 @Injectable({
   providedIn: 'root',
 })
-export class GlobalServiceService {
+export class GlobalData {
   private translate = inject(TranslateService);
   private router = inject(Router);
-  private localStorage = inject(LocalStorageService);
+  private localStorage = inject(LocalStorage);
   protected readonly flagPipe = new TuiFlagPipe();
 
   headerTitle: WritableSignal<string> = signal('Angular20');

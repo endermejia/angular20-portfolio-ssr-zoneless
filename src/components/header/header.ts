@@ -20,7 +20,7 @@ import {
 import { TuiAvatar } from '@taiga-ui/kit';
 import { TuiCell, TuiInputSearch, TuiNavigation } from '@taiga-ui/layout';
 import { filter, map, startWith, switchMap, timer } from 'rxjs';
-import { GlobalServiceService, OptionsItem, SearchData } from '../../services';
+import { GlobalData, OptionsItem, SearchData } from '../../services';
 
 @Component({
   selector: 'app-header',
@@ -44,11 +44,11 @@ import { GlobalServiceService, OptionsItem, SearchData } from '../../services';
     TuiTitle,
     TranslatePipe,
   ],
-  templateUrl: './header.component.html',
+  templateUrl: './header.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  protected globalService = inject(GlobalServiceService);
+  protected globalService = inject(GlobalData);
 
   open = false;
   protected readonly control = new FormControl('');

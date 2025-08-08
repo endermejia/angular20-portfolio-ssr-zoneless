@@ -78,7 +78,7 @@ interface OpenMeteoResponse {
 @Injectable({
   providedIn: 'root',
 })
-export class WeatherService {
+export class WeatherClient {
   private readonly isBrowser: boolean;
   private readonly http = inject(HttpClient);
   private readonly platformId = inject(PLATFORM_ID);

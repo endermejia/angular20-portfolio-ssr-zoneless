@@ -4,7 +4,7 @@ import { isPlatformBrowser } from '@angular/common';
 @Injectable({
   providedIn: 'root',
 })
-export class LocalStorageService {
+export class LocalStorage {
   private readonly isBrowser: boolean;
   private readonly memoryStorage = new Map<string, string>();
 

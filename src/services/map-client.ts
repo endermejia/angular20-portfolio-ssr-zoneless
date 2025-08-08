@@ -2,11 +2,7 @@ import { Inject, inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import type * as L from 'leaflet';
 import { debounceTime, Observable, of, Subject, switchMap } from 'rxjs';
-import {
-  WeatherData,
-  WeatherLocation,
-  WeatherService,
-} from './weather.service';
+import { WeatherData, WeatherLocation, WeatherClient } from './weather-client';
 
 interface MarkerClusterGroupInterface {
   addLayer: (layer: L.Layer) => this;
@@ -52,7 +48,7 @@ type MarkerClusterGroupStatic = new (
 ) => MarkerClusterGroupInterface;
 
 @Injectable()
-export class MapService {
+export class MapClient {
   public L: typeof L | null = null;
   private leafletLoadPromise: Promise<typeof L | null> | null = null;
   private loadAttempts = 0;
@@ -61,7 +57,7 @@ export class MapService {
   private markers: L.Marker[] = [];
   private markersLayer?: L.LayerGroup;
   private markerClusterGroup?: MarkerClusterGroupInterface;
-  private weatherService = inject(WeatherService);
+  private weatherService = inject(WeatherClient);
 
   // Set to track location IDs that already have markers
   private markerLocationIds = new Set<string>();

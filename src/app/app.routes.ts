@@ -4,14 +4,12 @@ export const routes: Routes = [
   {
     path: 'home',
     loadComponent: () =>
-      import('../components/home/home.component').then((m) => m.HomeComponent),
+      import('../components/home/home').then((m) => m.HomeComponent),
   },
   {
     path: 'profile',
     loadComponent: () =>
-      import('../components/profile/profile.component').then(
-        (m) => m.ProfileComponent,
-      ),
+      import('../components/profile/profile').then((m) => m.ProfileComponent),
   },
   {
     path: '',

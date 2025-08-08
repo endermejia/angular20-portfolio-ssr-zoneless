@@ -2,7 +2,7 @@ import { TuiRoot } from '@taiga-ui/core';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../components';
-import { GlobalServiceService, LocalStorageService } from '../services';
+import { GlobalData, LocalStorage } from '../services';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +20,8 @@ import { GlobalServiceService, LocalStorageService } from '../services';
   `,
 })
 export class AppComponent {
-  protected globalService = inject(GlobalServiceService);
-  private localStorage = inject(LocalStorageService);
+  protected globalService = inject(GlobalData);
+  private localStorage = inject(LocalStorage);
 
   constructor() {
     const localStorageLang = this.localStorage.getItem('language');
