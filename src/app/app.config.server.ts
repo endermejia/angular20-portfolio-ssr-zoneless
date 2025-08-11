@@ -15,8 +15,8 @@ interface TranslationData {
 // Custom TranslateLoader for SSR that loads translations from filesystem
 export class TranslateServerLoader implements TranslateLoader {
   constructor(
-    private prefix: string = 'i18n',
-    private suffix: string = '.json',
+    private prefix = 'i18n',
+    private suffix = '.json',
   ) {}
 
   getTranslation(lang: string): Observable<TranslationData> {

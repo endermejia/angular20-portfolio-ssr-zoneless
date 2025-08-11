@@ -128,6 +128,35 @@ export class HomeComponent {
     },
   ]);
 
+  // Expansion state for experience cards (collapsed by default)
+  protected readonly expanded = signal<Record<string, boolean>>({});
+
+  protected expKey = (exp: Experience) => `${exp.company}__${exp.start}`;
+
+  protected isExpanded = (exp: Experience): boolean => !!this.expanded()[this.expKey(exp)];
+
+  protected toggleExp(exp: Experience, evt?: Event) {
+    if (evt) {
+      const e = evt as Event & { preventDefault?: () => void; stopImmediatePropagation?: () => void };
+      e.preventDefault?.();
+      e.stopImmediatePropagation?.();
+      if (typeof evt.stopPropagation === 'function') {
+        evt.stopPropagation();
+      }
+    }
+    const key = this.expKey(exp);
+    this.expanded.update(state => ({ ...state, [key]: !state[key] }));
+  }
+
+  protected onExpKeydown(evt: Event, exp: Experience) {
+    const e = evt as KeyboardEvent;
+    const key = e.key;
+    if (key === 'Enter' || key === ' ') {
+      e.preventDefault();
+      this.toggleExp(exp);
+    }
+  }
+
   // Certifications
   protected readonly certifications = signal<Certification[]>([
     {

@@ -3,7 +3,7 @@
     <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
       <tui-avatar [src]="global.user().picture" size="xxl"></tui-avatar>
       <div class="flex-1">
-        <h1 class="text-3xl md:text-5xl font-bold leading-tight">
+        <h1 class="text-3xl md:text-5xl font-bold leading-tight hero-title">
           {{ 'home.title' | translate }}
         </h1>
         <p class="mt-4 text-base md:text-lg whitespace-pre-line opacity-80">
@@ -39,13 +39,13 @@
     </div>
 
     <div class="mt-12 grid gap-6 md:grid-cols-2">
-      <div class="p-6 rounded-xl border border-[color:var(--tui-border-normal)] neon-border">
+      <div class="p-6 rounded-xl border border-[color:var(--tui-border-normal)] surface-card">
         <h3 class="text-xl font-semibold">{{ 'home.about.title' | translate }}</h3>
         <p class="mt-3 opacity-80">
           {{ 'home.about.text' | translate }}
         </p>
       </div>
-      <div class="p-6 rounded-xl border border-[color:var(--tui-border-normal)] neon-border">
+      <div class="p-6 rounded-xl border border-[color:var(--tui-border-normal)] surface-card">
         <h3 class="text-xl font-semibold">{{ 'home.skills.title' | translate }}</h3>
         <ul class="mt-3 grid grid-cols-2 gap-2 text-sm opacity-90">
           <li>{{ 'skill.angular' | translate }}</li>
@@ -65,7 +65,12 @@
       <div class="mt-4 grid gap-4">
         @for (exp of experiences(); track exp.company + exp.start) {
           <article
-            class="p-5 rounded-xl border border-[color:var(--tui-border-normal)] hover:border-[color:var(--tui-border-hover)] transition-colors neon-border">
+            class="p-5 rounded-xl border border-[color:var(--tui-border-normal)] hover:border-[color:var(--tui-border-hover)] transition-colors surface-card cursor-pointer select-none"
+            role="button"
+            tabindex="0"
+            [attr.aria-expanded]="isExpanded(exp)"
+            (click.zoneless)="toggleExp(exp, $event)"
+            (keydown.zoneless)="onExpKeydown($event, exp)">
             <div class="flex items-start justify-between gap-4">
               <div>
                 <div class="text-base font-semibold">{{ exp.role }}</div>
@@ -78,20 +83,22 @@
                 }
               </div>
             </div>
-            <div class="mt-1 text-sm opacity-75">
-              @if (exp.location) {
-                <span>{{ exp.location }}</span>
-              }
-            </div>
-            @if (exp.descriptionKey) {
-              <p class="mt-3 text-sm opacity-90 whitespace-pre-line">{{ exp.descriptionKey | translate }}</p>
-            }
-            @if (exp.skills?.length) {
-              <ul class="mt-3 flex flex-wrap gap-2 text-xs opacity-80">
-                @for (s of exp.skills; track s) {
-                  <li class="px-2 py-1 rounded-full border border-[color:var(--tui-border-normal)]">{{ s }}</li>
+            @if (isExpanded(exp)) {
+              <div class="mt-1 text-sm opacity-75">
+                @if (exp.location) {
+                  <span>{{ exp.location }}</span>
                 }
-              </ul>
+              </div>
+              @if (exp.descriptionKey) {
+                <p class="mt-3 text-sm opacity-90 whitespace-pre-line">{{ exp.descriptionKey | translate }}</p>
+              }
+              @if (exp.skills?.length) {
+                <ul class="mt-3 flex flex-wrap gap-2 text-xs opacity-80">
+                  @for (s of exp.skills; track s) {
+                    <li class="px-2 py-1 rounded-full border border-[color:var(--tui-border-normal)]">{{ s }}</li>
+                  }
+                </ul>
+              }
             }
           </article>
         }
@@ -103,7 +110,7 @@
       <div class="mt-4 grid gap-4">
         @for (c of certifications(); track c.title + c.issueDate) {
           <article
-            class="p-5 rounded-xl border border-[color:var(--tui-border-normal)] hover:border-[color:var(--tui-border-hover)] transition-colors neon-border">
+            class="p-5 rounded-xl border border-[color:var(--tui-border-normal)] hover:border-[color:var(--tui-border-hover)] transition-colors surface-card">
             <div class="flex items-start justify-between gap-4">
               <div class="flex items-center gap-3">
                 <tui-avatar [src]="c.issuer === 'freeCodeCamp' ? fccLogo() : c.logo" size="s"></tui-avatar>
@@ -143,7 +150,7 @@
       <div class="mt-4 grid gap-4 md:grid-cols-2">
         @for (p of projects(); track p.name) {
           <a
-            class="p-5 rounded-xl border border-[color:var(--tui-border-normal)] hover:border-[color:var(--tui-border-hover)] transition-colors neon-border block"
+            class="p-5 rounded-xl border border-[color:var(--tui-border-normal)] hover:border-[color:var(--tui-border-hover)] transition-colors surface-card block"
             [href]="p.url"
             target="_blank"
             rel="noopener noreferrer"
