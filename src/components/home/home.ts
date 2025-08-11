@@ -17,7 +17,7 @@ interface Experience {
   role: string;
   employment: string;
   start: string; // e.g., "jun. 2025"
-  end: string; // e.g., "actualidad" or "may. 2024"
+  end?: string; // e.g., "may. 2024"
   duration?: string; // e.g., "3 meses"
   location?: string; // e.g., "En remoto"
   descriptionKey?: string; // i18n key for long description
@@ -69,9 +69,6 @@ export class HomeComponent {
       role: 'Angular Developer',
       employment: 'Jornada completa',
       start: 'jun. 2025',
-      end: 'actualidad',
-      duration: '',
-      location: 'En remoto',
       descriptionKey: 'home.experience.inetum',
       skills: [
         'Angular',
@@ -90,8 +87,6 @@ export class HomeComponent {
       employment: 'Jornada completa',
       start: 'jun. 2024',
       end: 'jun. 2025',
-      duration: '1 año 1 mes',
-      location: 'En remoto',
       descriptionKey: 'home.experience.convotis',
       skills: ['Angular', 'TypeScript', 'PrimeNG', 'Signals', 'RxJS'],
     },
@@ -101,7 +96,6 @@ export class HomeComponent {
       employment: 'Jornada completa',
       start: 'sept. 2023',
       end: 'may. 2024',
-      duration: '9 meses',
       descriptionKey: 'home.experience.clavei',
       skills: ['SASS', 'HTML5', 'Angular', 'RxJS'],
     },
@@ -111,7 +105,6 @@ export class HomeComponent {
       employment: 'Jornada completa',
       start: 'jul. 2022',
       end: 'sept. 2023',
-      duration: '1 año 3 meses',
       descriptionKey: 'home.experience.ricoh',
       skills: ['SASS', 'HTML5', 'Angular', 'TypeScript'],
     },
@@ -121,7 +114,6 @@ export class HomeComponent {
       employment: 'Jornada completa',
       start: 'dic. 2019',
       end: 'jul. 2022',
-      duration: '2 años 8 meses',
       location: 'Alicante y alrededores',
       descriptionKey: 'home.experience.nttdata',
       skills: ['SASS', 'HTML5', 'Angular', 'RxJS'],
@@ -133,11 +125,15 @@ export class HomeComponent {
 
   protected expKey = (exp: Experience) => `${exp.company}__${exp.start}`;
 
-  protected isExpanded = (exp: Experience): boolean => !!this.expanded()[this.expKey(exp)];
+  protected isExpanded = (exp: Experience): boolean =>
+    !!this.expanded()[this.expKey(exp)];
 
   protected toggleExp(exp: Experience, evt?: Event) {
     if (evt) {
-      const e = evt as Event & { preventDefault?: () => void; stopImmediatePropagation?: () => void };
+      const e = evt as Event & {
+        preventDefault?: () => void;
+        stopImmediatePropagation?: () => void;
+      };
       e.preventDefault?.();
       e.stopImmediatePropagation?.();
       if (typeof evt.stopPropagation === 'function') {
@@ -145,7 +141,7 @@ export class HomeComponent {
       }
     }
     const key = this.expKey(exp);
-    this.expanded.update(state => ({ ...state, [key]: !state[key] }));
+    this.expanded.update((state) => ({ ...state, [key]: !state[key] }));
   }
 
   protected onExpKeydown(evt: Event, exp: Experience) {

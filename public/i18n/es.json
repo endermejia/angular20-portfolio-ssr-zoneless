@@ -13,7 +13,7 @@
   "settings.language": "Idioma",
   "settings.theme": "Tema",
 
-  "home.title": "Desarrollador Frontend Senior 🧙‍♂️",
+  "home.title": "Desarrollador Frontend Senior",
   "home.subtitle": "Hola, soy Gabriel Mejía 👋\nSoy Desarrollador FrontEnd Senior.\nEnamorado de Angular y TypeScript desde 2019.\nSoy un programador motivado 👨‍💻 ... y un escalador apasionado 🧗‍♂️.",
   "home.about.title": "Acerca de",
   "home.about.text": "Construyo front-ends robustos, accesibles y de alto rendimiento con Angular, TypeScript moderno, señales, SSR y CD sin Zone.js. Me encanta crear UX encantadoras con Taiga UI y arquitectura limpia.",
@@ -30,6 +30,7 @@
   "skill.webdev": "Desarrollo web",
 
   "home.experience.title": "Experiencia profesional",
+  "home.experience.present": "actualidad",
   "home.experience.convotis": "Desarrollo e implementación de soluciones frontend para Prana Software, un ERP dirigido a pymes y autónomos, utilizando Angular 19 y PrimeNG. Trabajo centrado en una arquitectura robusta y mantenible, aplicando las últimas capacidades del framework: Signals, estrategia de detección de cambios OnPush, standalone components y control granular del ciclo de vida.\nExperiencia avanzada en el uso del core de Angular, incluyendo la configuración del injector, gestión de dependencias con providers, control de rutas con el Router, manejo del estado con servicios reactivos y estructuras basadas en observables (RxJS). Aplicación de principios de programación reactiva para garantizar flujos de datos eficientes y desacoplados, así como una experiencia de usuario fluida y dinámica.\nColaboración estrecha con equipos multidisciplinares para definir soluciones técnicas, establecer buenas prácticas y garantizar la escalabilidad del producto.",
   "home.experience.clavei": "Desarrollo e implementación de soluciones frontend para Prana Software, un ERP dirigido a pymes y autónomos, utilizando Angular 19 y PrimeNG. Trabajo centrado en una arquitectura robusta y mantenible, aplicando las últimas capacidades del framework: Signals, estrategia de detección de cambios OnPush, standalone components y control granular del ciclo de vida.\nExperiencia avanzada en el uso del core de Angular, incluyendo la configuración del injector, gestión de dependencias con providers, control de rutas con el Router, manejo del estado con servicios reactivos y estructuras basadas en observables (RxJS). Aplicación de principios de programación reactiva para garantizar flujos de datos eficientes y desacoplados, así como una experiencia de usuario fluida y dinámica.\nColaboración estrecha con equipos multidisciplinares para definir soluciones técnicas, establecer buenas prácticas y garantizar la escalabilidad del producto.",
   "home.experience.ricoh": "Como Desarrollador Senior Frontend en RICOH, lidero proyectos enfocados en el Principado de Asturias, colaborando estrechamente con el equipo de desarrollo para diseñar, implementar y mantener soluciones de alta calidad. Como experto en Angular, empleando principalmente versiones posteriores a la 12, utilizo tecnologías como HTML, CSS y TypeScript para crear interfaces de usuario intuitivas y atractivas. Además, desempeño un papel clave en la toma de decisiones técnicas y en la mentoría de otros miembros del equipo.",
