@@ -71,7 +71,7 @@
                 <div class="text-base font-semibold">{{ exp.role }}</div>
                 <div class="opacity-80">{{ exp.company }} · {{ exp.employment }}</div>
               </div>
-              <div class="text-right text-sm opacity-70 whitespace-nowrap">
+              <div class="text-right text-sm opacity-70">
                 {{ exp.start }} - {{ exp.end }}
                 @if (exp.duration) {
                   <span> · {{ exp.duration }}</span>
@@ -112,7 +112,7 @@
                   <div class="opacity-80 text-sm">{{ c.issuer }}</div>
                 </div>
               </div>
-              <div class="text-right text-sm opacity-70 whitespace-nowrap">
+              <div class="text-right text-sm opacity-70">
                 {{ 'home.certifications.issued' | translate }} {{ c.issueDate }}
               </div>
             </div>
@@ -184,7 +184,7 @@
           rel="noopener noreferrer"
           iconStart="@tui.linkedin"
         >
-          {{ 'common.linkedin' | translate }}
+          <span class="md:block hidden">{{ 'common.linkedin' | translate }}</span>
         </a>
         <a
           tuiButton
@@ -195,7 +195,7 @@
           rel="noopener noreferrer"
           iconStart="@tui.github"
         >
-          {{ 'common.github' | translate }}
+          <span class="md:block hidden">{{ 'common.github' | translate }}</span>
         </a>
         <a
           tuiButton
@@ -206,7 +206,7 @@
           rel="noopener noreferrer"
           iconStart="@tui.instagram"
         >
-          {{ 'common.instagram' | translate }}
+          <span class="md:block hidden">{{ 'common.instagram' | translate }}</span>
         </a>
       </div>
     </div>
