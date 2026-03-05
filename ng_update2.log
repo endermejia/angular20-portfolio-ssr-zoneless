@@ -1,0 +1,4 @@
+Using package manager: [90mbun[39m
+Collecting installed dependencies...
+An unhandled exception occurred: The project is configured to use 'bun', but it is not installed or cannot be found in the PATH. Please install 'bun' to continue.
+See "C:\Users\Mejia\AppData\Local\Temp\ng-i9Dp6T\angular-errors.log" for further details.

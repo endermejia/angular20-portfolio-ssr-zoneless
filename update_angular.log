@@ -1,1 +1,81 @@
-Error: Repository is not clean. Please commit or stash any changes before updating.
+Repository is not clean. Update changes will be mixed with pre-existing changes.
+The installed Angular CLI version is outdated.
+Installing a temporary Angular CLI versioned 20.3.19 to perform the update.
+(node:8644) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Repository is not clean. Update changes will be mixed with pre-existing changes.
+Using package manager: [90mnpm[39m
+Collecting installed dependencies...
+Found 61 dependencies.
+Fetching dependency metadata from registry...
+    Updating package.json with dependency @angular/build @ "21.2.1" (was "20.1.5")...
+    Updating package.json with dependency @angular/cli @ "21.2.1" (was "20.1.5")...
+    Updating package.json with dependency @angular/compiler-cli @ "21.2.1" (was "20.1.6")...
+    Updating package.json with dependency typescript @ "5.9.3" (was "5.8.3")...
+    Updating package.json with dependency @angular/animations @ "21.2.1" (was "20.1.6")...
+    Updating package.json with dependency @angular/cdk @ "20.2.14" (was "19.2.19")...
+    Updating package.json with dependency @angular/common @ "21.2.1" (was "20.1.6")...
+    Updating package.json with dependency @angular/compiler @ "21.2.1" (was "20.1.6")...
+    Updating package.json with dependency @angular/core @ "21.2.1" (was "20.1.6")...
+    Updating package.json with dependency @angular/forms @ "21.2.1" (was "20.1.6")...
+    Updating package.json with dependency @angular/platform-browser @ "21.2.1" (was "20.1.6")...
+    Updating package.json with dependency @angular/platform-browser-dynamic @ "21.2.1" (was "20.1.6")...
+    Updating package.json with dependency @angular/platform-server @ "21.2.1" (was "20.1.6")...
+    Updating package.json with dependency @angular/router @ "21.2.1" (was "20.1.6")...
+    Updating package.json with dependency @angular/ssr @ "21.2.1" (was "20.1.5")...
+[36mUPDATE[39m package.json (2664 bytes)
+[33mÔØ»[39m Cleaning node modules directory
+[32mÔ£ö[39m Cleaning node modules directory
+[33mÔØ»[39m Installing packages
+[32mÔ£ö[39m Installing packages
+[36m** Executing migrations of package '@angular/cli' **
+[39m
+[36mÔØ»[39m [1mRemove any karma configuration files that only contain the default content.[22m
+  The default configuration is automatically available without a specific project file.
+  Migration completed (No changes made).
+
+[36mÔØ»[39m [1mUpdate 'moduleResolution' to 'bundler' in TypeScript configurations.[22m
+  You can read more about this, here: https://www.typescriptlang.org/tsconfig/#moduleResolution
+  Migration completed (No changes made).
+
+[36mÔØ»[39m [1mUpdates the 'lib' property in tsconfig files to use 'es2022' or a more modern version.[22m
+  Migration completed (No changes made).
+
+[35m** Optional migrations of package '@angular/cli' **
+[39m
+This package has 1 optional migration that can be executed.
+[36mÔØ»[39m [1mMigrate application projects to the new build system.[22m
+[90m  ng update @angular/cli --name use-application-builder[39m
+
+[36m** Executing migrations of package '@angular/cdk' **
+[39m
+[36mÔØ»[39m [1mUpdates the Angular CDK to v20.[22m
+    
+      Ô£ô  Updated Angular CDK to version 20
+    
+  Migration completed (No changes made).
+
+[36m** Executing migrations of package '@angular/core' **
+[39m
+[36mÔØ»[39m [1mAdds `BootstrapContext` to `bootstrapApplication` calls in `main.server.ts` to support server rendering.[22m
+[36mUPDATE[39m src/main.server.ts (316 bytes)
+  Migration completed (1 file modified).
+
+[36mÔØ»[39m [1mMoves imports of `ApplicationConfig` from `@angular/platform-browser` to `@angular/core`.[22m
+  Migration completed (No changes made).
+
+[36mÔØ»[39m [1mMigrates deprecated bootstrap options to providers.[22m
+  Migration completed (No changes made).
+
+[36mÔØ»[39m [1mConverts the entire application to block control flow syntax.[22m
+  Migration completed (No changes made).
+
+[36mÔØ»[39m [1mEnsures that the Router.lastSuccessfulNavigation signal is now invoked.[22m
+  Migration completed (No changes made).
+
+[35m** Optional migrations of package '@angular/core' **
+[39m
+This package has 1 optional migration that can be executed.
+[36mÔØ»[39m [1mReplaces usages of the deprecated Router.getCurrentNavigation method with the Router.currentNavigation signal.[22m
+[90m  ng update @angular/core --name router-current-navigation[39m
+
