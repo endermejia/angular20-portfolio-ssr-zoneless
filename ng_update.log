@@ -1,0 +1,15 @@
+Using package manager: [90mnpm[39m
+Collecting installed dependencies...
+Found 61 dependencies.
+    We analyzed your package.json, there are some packages to update:
+    
+      Name                               Version                  Command to update
+     --------------------------------------------------------------------------------
+      @angular/cdk                       19.2.19 -> 20.2.9        ng update @angular/cdk@20
+      @angular/cli                       20.1.5 -> 21.2.1         ng update @angular/cli
+      @angular/core                      20.1.6 -> 21.2.1         ng update @angular/core
+      @taiga-ui/i18n                     4.48.0 -> 4.73.0         ng update @taiga-ui/i18n
+      angular-eslint                     19.2.0 -> 21.2.0         ng update angular-eslint
+    
+    There might be additional packages which don't provide 'ng update' capabilities that are outdated.
+    You can update the additional packages by running the update command of your package manager.
