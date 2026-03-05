@@ -1,23 +1,19 @@
 import { TuiRoot } from '@taiga-ui/core';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from '../components';
 import { GlobalData, LocalStorage } from '../services';
 import { TranslateService } from '@ngx-translate/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TuiRoot, HeaderComponent],
+  imports: [RouterOutlet, TuiRoot],
   template: `
     <tui-root
       class="overflow-hidden"
       [attr.tuiTheme]="globalService.selectedTheme()"
     >
-      <div class="h-[100dvh] flex flex-col">
-        <app-header />
-        <router-outlet />
-      </div>
+      <router-outlet />
     </tui-root>
   `,
 })

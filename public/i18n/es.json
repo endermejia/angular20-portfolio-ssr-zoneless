@@ -1,67 +1,23 @@
 {
-  "Menu": "Menú",
-  "Navigation": "Navegación",
-
-  "Portfolio": "Portafolio",
-  "Home": "Inicio",
-  "Experience": "Experiencia",
-  "Certifications": "Licencias y certificaciones",
-  "Projects": "Proyectos",
-  "Contact": "Contacto",
-
-  "preferences": "Preferencias",
-  "settings.language": "Idioma",
-  "settings.theme": "Tema",
-
   "home.title": "Desarrollador Frontend Senior",
   "home.subtitle": "Hola, soy Gabriel Mejía 👋\nSoy Desarrollador FrontEnd Senior.\nEnamorado de Angular y TypeScript desde 2019.\nSoy un programador motivado 👨‍💻 ... y un escalador apasionado 🧗‍♂️.",
-  "home.about.title": "Acerca de",
-  "home.about.text": "Construyo front-ends robustos, accesibles y de alto rendimiento con Angular, TypeScript moderno, señales, SSR y CD sin Zone.js. Me encanta crear UX encantadoras con Taiga UI y arquitectura limpia.",
-  "home.skills.title": "Habilidades",
-  "skill.angular": "Angular 2+ / 20",
-  "skill.typescript": "TypeScript",
-  "skill.signals": "Señales / RxJS",
-  "skill.ssr": "SSR / Universal",
-  "skill.zoneless": "Sin Zone.js",
-  "skill.taiga": "Taiga UI",
-  "skill.i18n": "i18n",
-  "skill.accessibility": "Accesibilidad",
-  "skill.javascript": "JavaScript",
-  "skill.webdev": "Desarrollo web",
-
   "home.experience.title": "Experiencia profesional",
   "home.experience.present": "actualidad",
   "home.experience.convotis": "Desarrollo e implementación de soluciones frontend para Prana Software, un ERP dirigido a pymes y autónomos, utilizando Angular 19 y PrimeNG. Trabajo centrado en una arquitectura robusta y mantenible, aplicando las últimas capacidades del framework: Signals, estrategia de detección de cambios OnPush, standalone components y control granular del ciclo de vida.\nExperiencia avanzada en el uso del core de Angular, incluyendo la configuración del injector, gestión de dependencias con providers, control de rutas con el Router, manejo del estado con servicios reactivos y estructuras basadas en observables (RxJS). Aplicación de principios de programación reactiva para garantizar flujos de datos eficientes y desacoplados, así como una experiencia de usuario fluida y dinámica.\nColaboración estrecha con equipos multidisciplinares para definir soluciones técnicas, establecer buenas prácticas y garantizar la escalabilidad del producto.",
   "home.experience.clavei": "Desarrollo e implementación de soluciones frontend para Prana Software, un ERP dirigido a pymes y autónomos, utilizando Angular 19 y PrimeNG. Trabajo centrado en una arquitectura robusta y mantenible, aplicando las últimas capacidades del framework: Signals, estrategia de detección de cambios OnPush, standalone components y control granular del ciclo de vida.\nExperiencia avanzada en el uso del core de Angular, incluyendo la configuración del injector, gestión de dependencias con providers, control de rutas con el Router, manejo del estado con servicios reactivos y estructuras basadas en observables (RxJS). Aplicación de principios de programación reactiva para garantizar flujos de datos eficientes y desacoplados, así como una experiencia de usuario fluida y dinámica.\nColaboración estrecha con equipos multidisciplinares para definir soluciones técnicas, establecer buenas prácticas y garantizar la escalabilidad del producto.",
   "home.experience.ricoh": "Como Desarrollador Senior Frontend en RICOH, lidero proyectos enfocados en el Principado de Asturias, colaborando estrechamente con el equipo de desarrollo para diseñar, implementar y mantener soluciones de alta calidad. Como experto en Angular, empleando principalmente versiones posteriores a la 12, utilizo tecnologías como HTML, CSS y TypeScript para crear interfaces de usuario intuitivas y atractivas. Además, desempeño un papel clave en la toma de decisiones técnicas y en la mentoría de otros miembros del equipo.",
-  "home.experience.nttdata": "Como Desarrollador Frontend en NTTData, contribuyo a proyectos importantes para clientes como Santa Lucía y Orange. Siendo responsable de la implementación y mejora de las interfaces de usuario utilizando Angular, en versiones a partir de la 9. Trabajando en estrecha colaboración con un equipo multidisciplinario y participando en el desarrollo de soluciones efectivas y de calidad.",
-  "home.experience.inetum": "Actualmente formo parte de Inetum, colaborando en un proyecto para el Principado de Asturias. Trabajo con Angular 20 en un stack moderno con SSR (Universal), hidratación incremental y una estrategia sin Zone.js (zoneless), priorizando rendimiento, accesibilidad y mantenibilidad. Participo en el diseño técnico, la implementación de funcionalidades y la mejora continua de la experiencia de usuario, aprovechando señales (signals), i18n y componentes standalone con Taiga UI.",
-
+  "home.experience.nttdata": "Como Desarrollador Frontend en NTT DATA, contribuyo a proyectos importantes para clientes como Santa Lucía y Orange. Fui responsable de la implementación y mejora de las interfaces de usuario utilizando Angular, en versiones a partir de la 9. Trabajando en estrecha colaboración con un equipo multidisciplinario y participando en el desarrollo de soluciones efectivas y de calidad.",
+  "home.experience.inetum": "Desarrollo de proyectos críticos para el Principado de Asturias utilizando Angular 20, con enfoque en innovación y alto rendimiento. Implementación de arquitecturas modernas aplicando estrategia sin Zone.js (zoneless), SSR e hidratación incremental para optimizar la carga y la de experiencia de usuario.\nUso extensivo de las herramientas más recientes del framework (Signals) y librerías de UI (Taiga UI) para la creación de interfaces accesibles (a11y) y preparadas para la internacionalización (i18n). Liderando el despliegue de soluciones tecnológicas eficientes para administración pública.",
   "home.certifications.title": "Licencias y certificaciones",
-  "home.certifications.issued": "Expedición:",
   "home.certifications.show_credential": "Mostrar credencial",
-
   "home.projects.title": "Proyectos",
-  "home.projects.github.title": "Explora mis repositorios",
-  "home.projects.github.subtitle": "Open-source y experimentos",
-  "home.projects.linkedin.title": "Experiencia profesional",
-  "home.projects.linkedin.subtitle": "Trayectoria y recomendaciones",
-  "home.projects.show_example": "Ver página",
-
-  "home.projects.angular19.desc": "Base project for Angular 19 Web Applications",
-  "home.projects.angular20.desc": "Este proyecto 🥰",
-  "home.projects.clubescalada.desc": "Página web del Club de Escalada Costa Blanca",
-  "home.projects.coffee.desc": "Aplicación para la gestión de una cafetería/bar/restaurante desarrollada con Next.js",
-  "home.projects.astro.desc": "Portfólio para un fotógrafo desarrollado con Astro",
-
   "home.contact.title": "Contacto",
   "home.contact.text": "Contáctame en LinkedIn o GitHub; estoy abierto a oportunidades interesantes y colaboraciones.",
-
   "aria.open_github_profile": "Abrir perfil de GitHub",
-  "aria.open_github_repositories": "Abrir repositorios de GitHub",
   "aria.open_linkedin_profile": "Abrir perfil de LinkedIn",
-
   "common.github": "GitHub",
   "common.linkedin": "LinkedIn",
-  "common.instagram": "Instagram"
+  "common.instagram": "Instagram",
+  "common.show_more": "Mostrar más",
+  "common.show_less": "Mostrar menos"
 }

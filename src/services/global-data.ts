@@ -174,13 +174,13 @@ export class GlobalData {
     ],
   });
 
-  private switchLanguage(): void {
+  switchLanguage(): void {
     this.selectedLanguage.set(this.selectedLanguage() === 'es' ? 'en' : 'es');
     this.translate.use(this.selectedLanguage());
     this.localStorage.setItem('language', this.selectedLanguage());
   }
 
-  private switchTheme(): void {
+  switchTheme(): void {
     this.selectedTheme.set(this.selectedTheme() === 'dark' ? 'light' : 'dark');
     this.localStorage.setItem('theme', this.selectedTheme());
   }
