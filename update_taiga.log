@@ -1,0 +1,3 @@
+Repository is not clean. Update changes will be mixed with pre-existing changes.
+An unhandled exception occurred: The project is configured to use 'bun', but it is not installed or cannot be found in the PATH. Please install 'bun' to continue.
+See "C:\Users\Mejia\AppData\Local\Temp\ng-0ALoB4\angular-errors.log" for further details.
