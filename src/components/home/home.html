@@ -82,6 +82,7 @@
       <div class="mt-8 grid gap-6">
         @for (exp of visibleExperiences(); track exp.company + exp.startDate) {
         <article
+          appScrollReveal
           class="p-6 rounded-2xl surface-card cursor-pointer select-none"
           role="button"
           tabindex="0"
@@ -152,7 +153,7 @@
       </h3>
       <div class="mt-8 grid gap-6">
         @for (c of certifications(); track c.title + c.issueDate) {
-        <article class="p-6 rounded-2xl surface-card">
+        <article appScrollReveal class="p-6 rounded-2xl surface-card">
           <div class="flex items-start justify-between gap-6">
             <div class="flex items-center gap-4">
               <tui-avatar
@@ -207,6 +208,7 @@
       <div class="mt-10 grid gap-8 md:grid-cols-2">
         @for (p of projects(); track p.name) {
         <article
+          appScrollReveal
           class="project-card group rounded-2xl surface-card overflow-hidden flex flex-col md:flex-row"
           [class.md:col-span-2]="p.isBest"
           [class.min-h-[500px]]="p.isBest"
