@@ -1,6 +1,6 @@
-# Guía del Proyecto (Angular 20, SSR, Zoneless)
+# Guía del Proyecto (Angular 21, SSR, Zoneless)
 
-Este proyecto está construido con Angular 20, renderizado del lado del servidor (SSR) y sin Zone.js (zoneless). Sigue estas pautas para mantener la coherencia, el rendimiento y la compatibilidad SSR.
+Este proyecto está construido con Angular 21, renderizado del lado del servidor (SSR) y sin Zone.js (zoneless). Sigue estas pautas para mantener la coherencia, el rendimiento y la compatibilidad SSR.
 
 ## 1) SSR (Server-Side Rendering)
 - Proveedores SSR: usa `provideServerRendering()` en `app.config.server.ts` (ya configurado).
