@@ -1,4 +1,4 @@
-<section class="w-full h-full overflow-auto">
+<section class="w-full h-full">
   <div class="max-w-5xl mx-auto px-4 py-10 md:py-20" id="profile">
     <!-- ── Settings bar (idioma + tema) ──────────────────────────────── -->
     <div class="flex justify-end items-center gap-3 mb-8">
@@ -24,14 +24,18 @@
     </div>
 
     <!-- ── Profile hero ──────────────────────────────────────────────── -->
-    <div class="p-8 rounded-2xl surface-card">
+    <div class="p-8 rounded-2xl surface-card reveal" appReveal>
       <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
         <tui-avatar
           [src]="global.user().picture"
           size="xxl"
-          class="shadow-sm"
+          class="shadow-sm reveal reveal-left"
+          appReveal
         ></tui-avatar>
-        <div class="flex-1 text-center md:text-left">
+        <div
+          class="flex-1 text-center md:text-left reveal reveal-right"
+          appReveal
+        >
           <h1
             class="text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500"
           >
@@ -75,11 +79,11 @@
     </div>
 
     <!-- ── Experience ─────────────────────────────────────────────────── -->
-    <div class="mt-20" id="experience">
+    <div class="mt-20 reveal" id="experience" appReveal>
       <h3 class="text-3xl font-bold tracking-tight px-2">
         {{ 'home.experience.title' | translate }}
       </h3>
-      <div class="mt-8 grid gap-6">
+      <div class="mt-8 grid gap-6 stagger-children">
         @for (exp of visibleExperiences(); track exp.company + exp.startDate) {
         <article
           class="p-6 rounded-2xl surface-card cursor-pointer select-none"
@@ -146,11 +150,11 @@
     </div>
 
     <!-- ── Certifications ─────────────────────────────────────────────── -->
-    <div class="mt-20" id="certifications">
+    <div class="mt-20 reveal" id="certifications" appReveal>
       <h3 class="text-3xl font-bold tracking-tight px-2">
         {{ 'home.certifications.title' | translate }}
       </h3>
-      <div class="mt-8 grid gap-6">
+      <div class="mt-8 grid gap-6 stagger-children">
         @for (c of certifications(); track c.title + c.issueDate) {
         <article class="p-6 rounded-2xl surface-card">
           <div class="flex items-start justify-between gap-6">
@@ -200,11 +204,11 @@
     </div>
 
     <!-- ── Projects ───────────────────────────────────────────────────── -->
-    <div class="mt-24" id="projects">
+    <div class="mt-24 reveal" id="projects" appReveal>
       <h3 class="text-3xl font-bold tracking-tight px-2">
         {{ 'home.projects.title' | translate }}
       </h3>
-      <div class="mt-10 grid gap-8 md:grid-cols-2">
+      <div class="mt-10 grid gap-8 md:grid-cols-2 stagger-children">
         @for (p of projects(); track p.name) {
         <article
           class="project-card group rounded-2xl surface-card overflow-hidden flex flex-col md:flex-row"
@@ -321,7 +325,7 @@
     </div>
 
     <!-- ── Contact ────────────────────────────────────────────────────── -->
-    <div class="mt-32 mb-16 text-center" id="contact">
+    <div class="mt-32 mb-16 text-center reveal" id="contact" appReveal>
       <h3 class="text-4xl font-bold tracking-tight">
         {{ 'home.contact.title' | translate }}
       </h3>

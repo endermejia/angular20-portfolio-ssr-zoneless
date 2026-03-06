@@ -12,6 +12,7 @@ import { TuiButton } from '@taiga-ui/core';
 import { TuiAvatar, TuiSegmented } from '@taiga-ui/kit';
 import { GlobalData } from '../../services';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
 
 @Pipe({
   name: 'safeUrl',
@@ -127,6 +128,7 @@ interface Project {
     SafeUrlPipe,
     ExpDatePipe,
     ExpDurationPipe,
+    ScrollRevealDirective,
   ],
   templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
