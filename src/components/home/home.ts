@@ -114,7 +114,6 @@ interface Project {
   siteUrl?: string;
   siteName?: string;
   tags?: Tag[];
-  isBest?: boolean;
   bgImage?: string;
 }
 
@@ -237,7 +236,6 @@ export class HomeComponent {
       repoUrl: 'https://github.com/endermejia/local-walls',
       siteUrl: 'https://climbeast.com',
       siteName: 'climbeast.com',
-      isBest: true,
       tags: [
         { name: 'Angular 21', icon: 'https://cdn.simpleicons.org/angular' },
         { name: 'Taiga UI' },
@@ -255,7 +253,6 @@ export class HomeComponent {
       repoUrl: 'https://github.com/endermejia/astro-photographer',
       siteUrl: 'https://nhoanoir.com',
       siteName: 'nhoanoir.com',
-      isBest: true,
       bgImage: 'https://nhoanoir.com/assets/images/og-image.jpg',
       tags: [
         { name: 'Astro', icon: 'https://cdn.simpleicons.org/astro' },
@@ -267,7 +264,6 @@ export class HomeComponent {
       repoUrl: 'https://github.com/endermejia/pix',
       siteUrl: 'https://gabriel-mejia.vercel.app/',
       siteName: 'gabriel-mejia.vercel.app',
-      isBest: true,
       tags: [
         { name: 'Next.js', icon: 'https://cdn.simpleicons.org/nextdotjs' },
         { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript' },
@@ -281,17 +277,6 @@ export class HomeComponent {
       tags: [
         { name: 'Angular', icon: 'https://cdn.simpleicons.org/angular' },
         { name: 'Angular Material' },
-      ],
-    },
-    {
-      name: 'Coffee Management',
-      repoUrl: 'https://github.com/endermejia/coffee-management',
-      siteUrl: 'https://coffee-management.netlify.app',
-      siteName: 'Live Demo',
-      tags: [
-        { name: 'React', icon: 'https://cdn.simpleicons.org/react' },
-        { name: 'Redux', icon: 'https://cdn.simpleicons.org/redux' },
-        { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript' },
       ],
     },
   ]);

@@ -53,18 +53,6 @@
               tuiButton
               appearance="primary"
               size="l"
-              [href]="github()"
-              target="_blank"
-              rel="noopener noreferrer"
-              iconStart="@tui.github"
-              [attr.aria-label]="('aria.open_github_profile' | translate)"
-            >
-              {{ 'common.github' | translate }}
-            </a>
-            <a
-              tuiButton
-              appearance="secondary"
-              size="l"
               [href]="linkedin()"
               target="_blank"
               rel="noopener noreferrer"
@@ -72,6 +60,18 @@
               [attr.aria-label]="('aria.open_linkedin_profile' | translate)"
             >
               {{ 'common.linkedin' | translate }}
+            </a>
+            <a
+              tuiButton
+              appearance="secondary"
+              size="l"
+              [href]="github()"
+              target="_blank"
+              rel="noopener noreferrer"
+              iconStart="@tui.github"
+              [attr.aria-label]="('aria.open_github_profile' | translate)"
+            >
+              {{ 'common.github' | translate }}
             </a>
           </div>
         </div>
@@ -211,13 +211,10 @@
       <div class="mt-10 grid gap-8 md:grid-cols-2 stagger-children">
         @for (p of projects(); track p.name) {
         <article
-          class="project-card group rounded-2xl surface-card overflow-hidden flex flex-col md:flex-row"
-          [class.md:col-span-2]="p.isBest"
-          [class.min-h-[500px]]="p.isBest"
-          [class.min-h-[350px]]="!p.isBest"
+          class="project-card group rounded-2xl surface-card overflow-hidden flex flex-col md:flex-row md:col-span-2 min-h-[500px]"
         >
-          <!-- Background logic for non-isBest or mobile displays -->
-          @if (!p.isBest && p.bgImage) {
+          <!-- Background logic for mobile displays or missing siteUrl -->
+          @if (p.bgImage && !p.siteUrl) {
           <div
             class="project-bg absolute inset-0 z-0 bg-cover bg-center"
             [style.background-image]="'url(' + p.bgImage + ')'"
@@ -229,24 +226,16 @@
           }
 
           <div
-            class="relative z-10 p-8 flex flex-col justify-center"
-            [class.w-full]="!p.isBest"
-            [class.flex-1]="p.isBest"
+            class="relative z-10 p-8 flex flex-col justify-center flex-1"
             [class.text-white]="p.bgImage"
           >
             <div class="flex items-center justify-between gap-4">
-              <div
-                class="font-black tracking-tight"
-                [class.text-3xl]="p.isBest || p.bgImage"
-                [class.text-2xl]="!p.isBest && !p.bgImage"
-              >
-                {{ p.name }}
-              </div>
+              <div class="font-black tracking-tight text-3xl">{{ p.name }}</div>
             </div>
             <div class="mt-6 flex flex-wrap gap-3">
               <a
                 tuiButton
-                [appearance]="p.bgImage || p.isBest ? 'secondary' : 'primary'"
+                [appearance]="p.bgImage || p.siteUrl ? 'secondary' : 'primary'"
                 size="m"
                 [href]="p.repoUrl"
                 target="_blank"
@@ -258,7 +247,7 @@
               @if (p.siteUrl && p.siteName) {
               <a
                 tuiButton
-                [appearance]="p.isBest ? 'primary' : 'secondary'"
+                appearance="primary"
                 size="m"
                 [href]="p.siteUrl"
                 target="_blank"
@@ -288,8 +277,8 @@
             }
           </div>
 
-          <!-- Web Preview for Best Projects -->
-          @if (p.isBest && p.siteUrl) {
+          <!-- Web Preview -->
+          @if (p.siteUrl) {
           <div
             class="flex relative z-10 w-full md:flex-1 p-4 md:p-8 items-center justify-center pointer-events-none mt-8 md:mt-0"
           >
