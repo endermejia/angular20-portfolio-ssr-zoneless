@@ -1,6 +1,6 @@
 {
   "home.title": "Senior Frontend Developer",
-  "home.subtitle": "Hi, I'm Gabriel Mejía 👋\nI'm a Senior FrontEnd Developer.\nIn love with Angular and TypeScript since 2019.\nI am a motivated coder 👨‍💻 ... and a passionate climber 🧗‍♂️.",
+  "home.subtitle": "Hi, I'm Gabriel Mejía 👋\nI'm a Senior FrontEnd Developer.\nIn love with <span class=\"text-gradient-angular\">Angular</span> and <span class=\"text-gradient-typescript\">TypeScript</span> since 2019.\nI am a motivated coder 👨‍💻 ... and a passionate climber 🧗‍♂️.",
   "home.experience.title": "Professional experience",
   "home.experience.present": "present",
   "home.experience.convotis": "Frontend development and implementation for Prana Software, an ERP aimed at SMEs and freelancers, using Angular 19 and PrimeNG. Work focused on a robust and maintainable architecture, leveraging the latest framework capabilities: Signals, OnPush change detection strategy, standalone components, and granular lifecycle control.\nAdvanced experience with Angular core, including injector configuration, dependency management with providers, route control with the Router, state handling with reactive services, and observable-based structures (RxJS). Application of reactive programming principles to ensure efficient, decoupled data flows and a smooth, dynamic user experience.\nClose collaboration with multidisciplinary teams to define technical solutions, establish best practices, and ensure product scalability.",

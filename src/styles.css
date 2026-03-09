@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+:root {
+  --full-contrast: #000;
+  --orange-red: oklch(63.32% .24 31.68);
+  --vivid-pink: oklch(69.02% .277 332.77);
+  --electric-violet: oklch(53.18% .28 296.97);
+  --red-to-pink-to-purple-horizontal-gradient: linear-gradient(90deg, var(--orange-red) 0%, var(--vivid-pink) 50%, var(--electric-violet) 100%);
+  
+  --ts-blue-light: oklch(70% 0.15 250);
+  --ts-blue-medium: oklch(60% 0.2 260);
+  --ts-blue-dark: oklch(50% 0.25 270);
+  --ts-gradient: linear-gradient(90deg, var(--ts-blue-light) 0%, var(--ts-blue-medium) 50%, var(--ts-blue-dark) 100%);
+}
+
+[tuiTheme="dark"] {
+  --full-contrast: #fff;
+  --orange-red: color-mix(in srgb, oklch(63.32% .24 31.68), var(--full-contrast) 60%);
+  --vivid-pink: color-mix(in srgb, oklch(69.02% .277 332.77), var(--full-contrast) 70%);
+  --electric-violet: color-mix(in srgb, oklch(53.18% .28 296.97), var(--full-contrast) 70%);
+  --red-to-pink-to-purple-horizontal-gradient: linear-gradient(90deg, var(--orange-red) 0%, var(--vivid-pink) 50%, var(--electric-violet) 100%);
+
+  /* Similar contrast logic for TypeScript blue */
+  --ts-blue-light: color-mix(in srgb, oklch(70% 0.15 250), var(--full-contrast) 60%);
+  --ts-blue-medium: color-mix(in srgb, oklch(60% 0.2 260), var(--full-contrast) 70%);
+  --ts-blue-dark: color-mix(in srgb, oklch(50% 0.25 270), var(--full-contrast) 70%);
+  --ts-gradient: linear-gradient(90deg, var(--ts-blue-light) 0%, var(--ts-blue-medium) 50%, var(--ts-blue-dark) 100%);
+}
+
 /* ─── Modern Minimalist Base ────────────────────────────────────────── */
 body {
   background-color: var(--tui-background-base);
@@ -26,6 +53,22 @@ tui-root::before {
   -webkit-text-fill-color: transparent;
   font-weight: 800;
   letter-spacing: -0.02em;
+}
+
+.text-gradient-angular {
+  background: var(--red-to-pink-to-purple-horizontal-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.text-gradient-typescript {
+  background: var(--ts-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
 }
 
 /* ─── Surface Card (Cleaner) ─────────────────────────────────────────── */

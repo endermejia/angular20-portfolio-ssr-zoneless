@@ -1,7 +1,7 @@
 <section class="w-full h-full">
-  <div class="max-w-5xl mx-auto px-4 py-10 md:py-20" id="profile">
+  <div class="max-w-5xl mx-auto px-4 pt-4 pb-10 md:py-20" id="profile">
     <!-- ── Settings bar (idioma + tema) ──────────────────────────────── -->
-    <div class="flex justify-end items-center gap-3 mb-8">
+    <div class="flex justify-end items-center gap-3 mb-4 md:mb-8">
       <!-- Language segmented -->
       <tui-segmented
         size="s"
@@ -24,7 +24,7 @@
     </div>
 
     <!-- ── Profile hero ──────────────────────────────────────────────── -->
-    <div class="p-8 rounded-2xl surface-card reveal" appReveal>
+    <div class="p-6 md:p-10 rounded-2xl surface-card reveal" appReveal>
       <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
         <tui-avatar
           [src]="global.user().picture"
@@ -43,9 +43,8 @@
           </h1>
           <p
             class="mt-4 text-lg md:text-xl opacity-70 font-medium whitespace-pre-line"
-          >
-            {{ 'home.subtitle' | translate }}
-          </p>
+            [innerHTML]="'home.subtitle' | translate"
+          ></p>
           <div
             class="mt-8 flex flex-wrap justify-center md:justify-start gap-4"
           >
