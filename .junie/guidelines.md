@@ -1,6 +1,6 @@
-# Guía del Proyecto (Angular 21, SSR, Zoneless)
+# Guía del Proyecto (Angular 22, SSR, Zoneless)
 
-Este proyecto está construido con Angular 21, renderizado del lado del servidor (SSR) y sin Zone.js (zoneless). Sigue estas pautas para mantener la coherencia, el rendimiento y la compatibilidad SSR.
+Este proyecto está construido con Angular 22, renderizado del lado del servidor (SSR) y sin Zone.js (zoneless). Sigue estas pautas para mantener la coherencia, el rendimiento y la compatibilidad SSR.
 
 ## 1) SSR (Server-Side Rendering)
 - Proveedores SSR: usa `provideServerRendering()` en `app.config.server.ts` (ya configurado).
@@ -19,7 +19,7 @@ Este proyecto está construido con Angular 21, renderizado del lado del servidor
 - Cambio de detección manual: cuando actualices estado desde callbacks externos, usa señales o `effect()` para notificar a la vista.
 - Evita patrones que dependan de Zone.js (p.ej., no confíes en que la vista se actualiza sola tras promesas/tiempos). Usa señales para estado reactivo.
 
-## 3) Sintaxis moderna Angular 20
+## 3) Sintaxis moderna Angular 22
 - Control flow:
   - `@if ... { } @else { }`
   - `@for (item of list; track item.id) { } @empty { }`
@@ -60,7 +60,7 @@ Este proyecto está construido con Angular 21, renderizado del lado del servidor
 
 ## 10) Desarrollo y SSR local
 - Desarrollo SPA: `npm start` (sin SSR).
-- Build SSR: `npm run build` y luego `npm run serve:ssr:angular20` para servir SSR desde `dist/`.
+- Build SSR: `npm run build` y luego `npm run serve:ssr:angular22` para servir SSR desde `dist/`.
 - Verifica siempre que:
   - No hay errores de acceso a `window/document` en servidor.
   - Las vistas hidratan sin errores en cliente.

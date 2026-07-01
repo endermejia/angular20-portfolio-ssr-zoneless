@@ -1,23 +1,62 @@
-# Angular20
-Base project for Web Applications:
-- [Angular 21](https://github.com/angular/angular-cli)
-  - SSR
-  - Zoneless
-  - OnPush and Standalone components
-  - GlobalService using Signals
-- [Taiga UI](https://taiga-ui.dev/), with mobile first templates
-- [Tailwind 4](https://tailwindcss.com/)
-- ESLINT
+# Angular 22 Portfolio - Modern, Zoneless & SSR Developer Portfolio Template
+
+[![Angular Version](https://img.shields.io/badge/Angular-22.0.4-DD0031?style=flat-square&logo=angular)](https://angular.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4.1.7-06B6D4?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
+[![Taiga UI](https://img.shields.io/badge/Taiga_UI-4.89.0-FF4B5C?style=flat-square)](https://taiga-ui.dev/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/gabri-mejia/deploy-status)](https://gabri-mejia.netlify.app/home)
+
+A high-performance, modern, and SEO-friendly **Angular Portfolio** template designed for developers to showcase their work, experience, and skills. Built from the ground up with **Angular 22**, using a Zoneless change detection architecture, Server-Side Rendering (SSR), Taiga UI, and Tailwind CSS 4.
 
 With love, by Gabri Mejía ❤
 
-[Live DEMO](https://gabri-mejia.netlify.app/home) 🚀
+🚀 **[Live DEMO](https://gabri-mejia.netlify.app/home)**
 
-## Development server
+---
+
+## 🌟 Key Features
+
+This project serves as a showcase of the latest and most modern frontend development practices:
+
+- **Angular 22 Core**: Leveraging the absolute latest framework features including Signals, Standalone components, block control flow (`@if`, `@for`, `@defer`), and functional injectors (`inject()`).
+- **Zoneless Change Detection**: Highly optimized rendering architecture using native Angular signals without the overhead of Zone.js.
+- **Server-Side Rendering (SSR)**: Perfect lighthouse SEO and fast initial page loads, deploying seamlessly on Netlify.
+- **Incremental Hydration**: Improved hydration performance with Event Replay.
+- **Taiga UI**: Built with accessible (a11y-compliant), mobile-first components and templates.
+- **Tailwind CSS 4**: Modern styling utilizing the brand new Tailwind CSS 4 engine.
+- **Multi-language Support (i18n)**: Fully localized in both English and Spanish with runtime language toggling.
+- **ESLint & Prettier**: Configured linting and code formatting out-of-the-box.
+
+---
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+You need [Bun](https://bun.sh/) or [Node.js](https://nodejs.org/) installed on your machine.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/endermejia/angular20-portfolio-ssr-zoneless.git
+   cd angular20-portfolio-ssr-zoneless
+   ```
+
+2. Install dependencies:
+   ```bash
+   bun install
+   # or
+   npm install
+   ```
+
+### Development Server
 
 To start a local development server, run:
 
 ```bash
+bun start
+# or
 npm start
 ```
 
@@ -26,77 +65,81 @@ This will start the server with Hot Module Replacement (HMR) disabled, which all
 If you prefer to use HMR (note that this will cause all `@defer` block dependencies to be loaded eagerly), you can run:
 
 ```bash
+bun run start:hmr
+# or
 npm run start:hmr
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Once the dev server is running, open your browser and navigate to `http://localhost:4200/`.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📦 Building and Running Production SSR
 
-```bash
-ng generate component component-name
-```
+### Build the Project
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+To build the browser bundle and server bundle for Server-Side Rendering:
 
 ```bash
-ng generate --help
+bun run build
+# or
+npm run build
 ```
 
-## Building
+This compiles your project and stores the build artifacts in the `dist/angular22` directory.
 
-To build the project run:
+### Run Local SSR Server
+
+To run the built SSR application locally:
 
 ```bash
-ng build
+bun run serve:ssr:angular22
+# or
+npm run serve:ssr:angular22
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 🚀 Deploying to Netlify
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+This project is fully configured for SSR on Netlify using the official `@netlify/angular-runtime` plugin.
 
-```bash
-ng test
-```
+1. Connect your repository to Netlify.
+2. Ensure the build command is: `npm run build`.
+3. Set the publish directory to: `dist/angular22/browser`.
+4. Netlify will detect `@netlify/angular-runtime` in `netlify.toml` and configure SSR automatically.
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🔍 GitHub SEO Optimization & Configuration
 
-```bash
-ng e2e
-```
+To make this repository rank high when users search for **"portfolio angular"** or **"angular portfolio"** on GitHub, make sure you configure your GitHub repository settings as follows:
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+1. **Repository Description**:
+   > A modern Angular 22 Portfolio template featuring SSR (Server-Side Rendering), Zoneless change detection, Signals, Taiga UI, and Tailwind CSS 4. Optimized for performance and SEO, perfect for frontend developer portfolios.
+2. **Repository Topics / Tags**:
+   Add the following topics to your GitHub repository settings:
+   - `angular`
+   - `angular-portfolio`
+   - `portfolio`
+   - `portfolio-template`
+   - `angular22`
+   - `ssr`
+   - `zoneless`
+   - `signals`
+   - `taiga-ui`
+   - `tailwindcss`
+   - `frontend-portfolio`
+   - `developer-portfolio`
+3. **Repository Homepage URL**:
+   Set the website link to: `https://gabri-mejia.netlify.app/home`
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-
-## Deploying to Netlify
-
-This project is configured for SSR on Netlify using the official Netlify Angular Runtime.
-
-Steps:
-- Connect this repository to Netlify.
-- Ensure the build command is: `npm run build`.
-- Publish directory: `dist/angular20/browser`.
-- Netlify will detect `@netlify/angular-runtime` from `netlify.toml` and configure SSR automatically.
-
-Notes:
-- No custom redirects are needed; the plugin manages them for SSR and CSR fallback.
-- The server bundle is built to `dist/angular20/server` by Angular.
-
-## Notes on Server-Side Rendering (SSR)
+## 📜 Notes on Server-Side Rendering (SSR)
 
 When running the application with SSR, you may see the following message in the console:
-
 ```
 Not in browser environment, skipping map initialization
 ```
-
 This is expected behavior and not an error. The map initialization is intentionally skipped during server-side rendering because map libraries like Leaflet require browser-specific APIs that are not available in the server environment. The map will be properly initialized when the application runs in the browser.

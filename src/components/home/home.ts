@@ -155,7 +155,7 @@ export class HomeComponent {
       startDate: '2025-06-01',
       location: 'Principado de Asturias',
       descriptionKey: 'home.experience.inetum',
-      skills: ['Angular 20', 'SSR', 'Zoneless', 'Taiga UI', 'i18n', 'Signals'],
+      skills: ['Angular 22', 'SSR', 'Zoneless', 'Taiga UI', 'i18n', 'Signals'],
     },
     {
       company: 'CONVOTIS Iberia',
@@ -237,7 +237,7 @@ export class HomeComponent {
       siteUrl: 'https://climbeast.com',
       siteName: 'climbeast.com',
       tags: [
-        { name: 'Angular 21', icon: 'https://cdn.simpleicons.org/angular' },
+        { name: 'Angular 22', icon: 'https://cdn.simpleicons.org/angular' },
         { name: 'Taiga UI' },
         { name: 'Signal' },
         { name: 'Zoneless' },

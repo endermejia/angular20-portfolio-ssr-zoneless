@@ -40,9 +40,9 @@ export class AppComponent {
     }
 
     // SEO: Set title and meta tags (SSR-safe)
-    const appTitle = 'Gabriel Mejía | Angular Developer';
+    const appTitle = 'Gabriel Mejía | Senior Angular 22 Developer';
     const description =
-      'Senior Frontend Developer specialized in Angular, TypeScript, Signals, SSR and zoneless change detection. Portfolio, projects and contact.';
+      'Senior Frontend Developer specialized in Angular 22, TypeScript, Signals, SSR and zoneless change detection. Portfolio, projects and contact.';
 
     this.title.setTitle(appTitle);
 
