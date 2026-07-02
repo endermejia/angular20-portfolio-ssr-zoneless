@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, effect } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { GlobalData, LocalStorage } from '../services';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,7 +10,7 @@ import { Meta, Title } from '@angular/platform-browser';
   template: `
     <div
       class="overflow-hidden min-h-screen flex flex-col"
-      [attr.tuiTheme]="globalService.selectedTheme()"
+      [attr.theme]="globalService.selectedTheme()"
     >
       <router-outlet />
     </div>
@@ -36,6 +36,13 @@ export class AppComponent {
       this.globalService.selectedTheme.set(
         localStorageTheme as 'dark' | 'light',
       );
+    }
+
+    if (typeof document !== 'undefined') {
+      effect(() => {
+        const theme = this.globalService.selectedTheme();
+        document.documentElement.setAttribute('theme', theme);
+      });
     }
 
     // SEO: Set title and meta tags (SSR-safe)

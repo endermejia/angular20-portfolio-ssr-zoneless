@@ -12,13 +12,13 @@
   --pixel-accent-red: #d81b1b;
   --pixel-accent-blue: #0066cc;
   --pixel-accent-green: #2e7d32;
-  --pixel-accent-yellow: #a07800;
+  --pixel-accent-yellow: #7c5200;
 
   --red-to-pink-to-purple-horizontal-gradient: none;
   --ts-gradient: none;
 }
 
-[tuiTheme="dark"] {
+[theme="dark"] {
   /* Pixel Art Theme Color Tokens - Dark Arcade Neon Style */
   --pixel-bg: #06060a; /* Very dark deep space black */
   --pixel-card-bg: #11111b; /* Sleek dark card background */
@@ -108,9 +108,9 @@ h6 {
 }
 
 /* Phosphor Glow for headings in dark mode */
-[tuiTheme="dark"] h1,
-[tuiTheme="dark"] h2,
-[tuiTheme="dark"] h3 {
+[theme="dark"] h1,
+[theme="dark"] h2,
+[theme="dark"] h3 {
   text-shadow: 0 0 8px rgba(255, 0, 85, 0.3);
 }
 
@@ -120,6 +120,9 @@ h6 {
   background-clip: unset !important;
   -webkit-text-fill-color: unset !important;
   color: var(--pixel-accent-red) !important;
+}
+
+[theme="dark"] .text-gradient-angular {
   text-shadow: 0 0 6px rgba(255, 34, 85, 0.4);
 }
 
@@ -129,6 +132,9 @@ h6 {
   background-clip: unset !important;
   -webkit-text-fill-color: unset !important;
   color: var(--pixel-accent-blue) !important;
+}
+
+[theme="dark"] .text-gradient-typescript {
   text-shadow: 0 0 6px rgba(0, 204, 255, 0.4);
 }
 
@@ -295,7 +301,7 @@ h6 {
 }
 
 /* Invert black brand logos in dark mode for high visibility */
-[tuiTheme="dark"] img[src*="nextdotjs"] {
+[theme="dark"] img[src*="nextdotjs"] {
   filter: invert(1) brightness(2) !important;
 }
 
