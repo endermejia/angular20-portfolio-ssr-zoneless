@@ -75,11 +75,17 @@ body {
 
 /* ─── Typography overrides ────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6, .pixel-title {
-  font-family: 'Press Start 2P', monospace !important;
-  line-height: 1.5 !important;
+  font-family: 'VT323', monospace !important;
+  line-height: 1.2 !important;
   letter-spacing: 0.05em !important;
   text-transform: uppercase;
 }
+
+h1 { font-size: 3.5rem !important; }
+h2 { font-size: 3rem !important; }
+h3 { font-size: 2.5rem !important; }
+h4 { font-size: 2rem !important; }
+h5, h6 { font-size: 1.5rem !important; }
 
 /* Phosphor Glow for headings in dark mode */
 [tuiTheme="dark"] h1, [tuiTheme="dark"] h3 {
@@ -138,8 +144,8 @@ button[tuiButton], a[tuiButton] {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-family: 'Press Start 2P', monospace !important;
-  font-size: 0.7rem !important;
+  font-family: 'VT323', monospace !important;
+  font-size: 1.1rem !important;
   text-transform: uppercase !important;
   border-radius: 0px !important;
   border: 4px solid var(--pixel-border-color) !important;
@@ -192,8 +198,8 @@ tui-segmented button {
   background-clip: border-box !important;
   clip-path: none !important;
   border-radius: 0px !important;
-  font-family: 'Press Start 2P', monospace !important;
-  font-size: 0.55rem !important;
+  font-family: 'VT323', monospace !important;
+  font-size: 0.95rem !important;
   border-right: 2px solid var(--pixel-border-color) !important;
   color: var(--pixel-text-primary) !important;
   transition: none !important;
@@ -224,15 +230,24 @@ tui-avatar {
   background: var(--pixel-card-bg) !important;
 }
 
+@media (min-width: 768px) {
+  tui-avatar.profile-avatar {
+    width: 200px !important;
+    height: 200px !important;
+    min-width: 200px !important;
+    min-height: 200px !important;
+  }
+}
+
 /* ─── Skill Chips (NES-style items) ──────────────────────────────── */
 .skill-chip {
   background: var(--pixel-card-bg) !important;
   border: 2px solid var(--pixel-border-color) !important;
   border-radius: 0px !important;
   color: var(--pixel-text-primary) !important;
-  font-family: 'Press Start 2P', monospace !important;
-  font-size: 0.55rem !important;
-  padding: 6px 10px !important;
+  font-family: 'VT323', monospace !important;
+  font-size: 0.9rem !important;
+  padding: 4px 8px !important;
   box-shadow: 2px 2px 0px var(--pixel-border-color) !important;
   margin: 2px !important;
 }
