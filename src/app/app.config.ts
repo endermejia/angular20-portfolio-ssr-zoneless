@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideClientHydration,
   withEventReplay,
@@ -15,28 +14,30 @@ import {
 } from '@angular/platform-browser';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { GlobalData } from '../services';
 import { Observable, of } from 'rxjs';
 
 import { routes } from './app.routes';
+
+interface TranslationData {
+  [key: string]: string | TranslationData;
+}
 
 export class TranslateBrowserLoader implements TranslateLoader {
   constructor(
     private transferState: TransferState,
     private http: HttpClient,
-    private prefix: string = '/i18n/',
-    private suffix: string = '.json',
+    private prefix = '/i18n/',
+    private suffix = '.json',
   ) {}
 
-  getTranslation(lang: string): Observable<any> {
-    const key = makeStateKey<any>('translation-' + lang);
+  getTranslation(lang: string): Observable<TranslationData> {
+    const key = makeStateKey<TranslationData>('translation-' + lang);
     const data = this.transferState.get(key, null);
     if (data) {
-      return of(data);
+      return of(data as TranslationData);
     }
     const httpLoader = new TranslateHttpLoader(this.http, this.prefix, this.suffix);
-    return httpLoader.getTranslation(lang);
+    return httpLoader.getTranslation(lang) as Observable<TranslationData>;
   }
 }
 
@@ -50,7 +51,6 @@ export function translateBrowserLoaderFactory(
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideAnimations(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(withFetch()),
