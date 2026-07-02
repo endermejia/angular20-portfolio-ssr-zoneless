@@ -26,7 +26,6 @@
     "@angular/platform-server": "^22.0.4",
     "@angular/router": "^22.0.4",
     "@angular/ssr": "^22.0.4",
-    "@netlify/angular-runtime": "^2.3.1",
     "@ng-web-apis/common": "^4.14.1",
     "@ng-web-apis/intersection-observer": "^4.14.1",
     "@ng-web-apis/mutation-observer": "^4.14.1",
