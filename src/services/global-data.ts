@@ -44,7 +44,7 @@ export class GlobalData {
   headerTitle: WritableSignal<string> = signal('Portfolio');
   user: WritableSignal<User> = signal({
     name: 'Gabriel Mejía',
-    picture: 'https://avatars.githubusercontent.com/u/55515925?v=4',
+    picture: 'avatar.png',
   });
 
   selectedLanguage: WritableSignal<'es' | 'en'> = signal('es');
