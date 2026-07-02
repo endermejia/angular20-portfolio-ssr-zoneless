@@ -15,8 +15,6 @@ import {
 } from '@angular/platform-browser';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { provideEventPlugins } from '@taiga-ui/event-plugins';
-import { TUI_LANGUAGE } from '@taiga-ui/i18n';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { GlobalData } from '../services';
 import { Observable, of } from 'rxjs';
@@ -65,13 +63,5 @@ export const appConfig: ApplicationConfig = {
       },
       defaultLanguage: 'es',
     }),
-    provideEventPlugins(),
-    {
-      provide: TUI_LANGUAGE,
-      useFactory: (globalService: GlobalData) => {
-        return toObservable(globalService.tuiLanguage);
-      },
-      deps: [GlobalData],
-    },
   ],
 };

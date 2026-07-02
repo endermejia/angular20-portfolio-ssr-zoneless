@@ -8,8 +8,6 @@ import {
   PipeTransform,
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { TuiButton } from '@taiga-ui/core';
-import { TuiAvatar, TuiSegmented } from '@taiga-ui/kit';
 import { GlobalData } from '../../services';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
@@ -120,9 +118,6 @@ interface Project {
 @Component({
   selector: 'app-home',
   imports: [
-    TuiButton,
-    TuiAvatar,
-    TuiSegmented,
     TranslatePipe,
     SafeUrlPipe,
     ExpDatePipe,

@@ -7,10 +7,8 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { TuiFlagPipe } from '@taiga-ui/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorage } from './local-storage';
-import { TUI_ENGLISH_LANGUAGE, TUI_SPANISH_LANGUAGE } from '@taiga-ui/i18n';
 
 interface User {
   name: string;
@@ -39,7 +37,6 @@ export class GlobalData {
   private translate = inject(TranslateService);
   private router = inject(Router);
   private localStorage = inject(LocalStorage);
-  protected readonly flagPipe = new TuiFlagPipe();
 
   headerTitle: WritableSignal<string> = signal('Portfolio');
   user: WritableSignal<User> = signal({
@@ -49,15 +46,6 @@ export class GlobalData {
 
   selectedLanguage: WritableSignal<'es' | 'en'> = signal('es');
   selectedTheme: WritableSignal<'light' | 'dark'> = signal('light');
-
-  // Computed signal for Taiga UI language based on selectedLanguage
-  tuiLanguage: Signal<
-    typeof TUI_SPANISH_LANGUAGE | typeof TUI_ENGLISH_LANGUAGE
-  > = computed(() =>
-    this.selectedLanguage() === 'es'
-      ? TUI_SPANISH_LANGUAGE
-      : TUI_ENGLISH_LANGUAGE,
-  );
 
   drawer: WritableSignal<OptionsData> = signal({
     Navigation: [
@@ -123,14 +111,12 @@ export class GlobalData {
     preferences: [
       {
         name: 'settings.language',
-        icon: this.flagPipe.transform(
-          this.selectedLanguage() === 'es' ? 'es' : 'gb',
-        ),
+        icon: this.selectedLanguage() === 'es' ? '🇪🇸' : '🇬🇧',
         fn: () => this.switchLanguage(),
       },
       {
         name: 'settings.theme',
-        icon: `@tui.${this.selectedTheme() === 'dark' ? 'sun' : 'moon'}`,
+        icon: this.selectedTheme() === 'dark' ? '☀️' : '🌙',
         fn: () => this.switchTheme(),
       },
     ],

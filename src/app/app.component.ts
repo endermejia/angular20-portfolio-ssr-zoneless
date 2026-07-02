@@ -1,4 +1,3 @@
-import { TuiRoot } from '@taiga-ui/core';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { GlobalData, LocalStorage } from '../services';
@@ -7,14 +6,14 @@ import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TuiRoot],
+  imports: [RouterOutlet],
   template: `
-    <tui-root
-      class="overflow-hidden"
+    <div
+      class="overflow-hidden min-h-screen flex flex-col"
       [attr.tuiTheme]="globalService.selectedTheme()"
     >
       <router-outlet />
-    </tui-root>
+    </div>
   `,
 })
 export class AppComponent {

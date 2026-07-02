@@ -3,7 +3,6 @@
 [![Angular Version](https://img.shields.io/badge/Angular-22.0.4-DD0031?style=flat-square&logo=angular)](https://angular.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4.1.7-06B6D4?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
-[![Taiga UI](https://img.shields.io/badge/Taiga_UI-4.89.0-FF4B5C?style=flat-square)](https://taiga-ui.dev/)
 [![Vercel Deployment](https://img.shields.io/badge/Deploy-Vercel-black?style=flat-square&logo=vercel)](https://gabri-mejia.vercel.app/home)
 
 A high-performance, responsive, and SEO-friendly **Retro Arcade Developer Portfolio** template. Built from the ground up with the latest **Angular 22** technologies, featuring a retro 8-bit aesthetic, CRT screen filters, interactive Retro Windows mockups, and fully localized translations.

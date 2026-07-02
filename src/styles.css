@@ -37,7 +37,7 @@
 body {
   background-color: var(--pixel-bg) !important;
   color: var(--pixel-text-primary) !important;
-  font-family: "Pixelify Sans", "Inter", system-ui, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   transition: background-color 0.2s steps(4);
@@ -163,14 +163,12 @@ h6 {
   z-index: 1;
 }
 
-/* ─── Retro Buttons (NES-style overrides for Taiga UI button) ─────── */
-button[tuiButton],
-a[tuiButton] {
+/* ─── Retro Buttons (NES-style) ─────────────────────────────────── */
+.pixel-btn {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   font-family: "VT323", monospace !important;
-  font-size: 1.1rem !important;
   text-transform: uppercase !important;
   border-radius: 0px !important;
   border: 4px solid var(--pixel-border-color) !important;
@@ -178,94 +176,68 @@ a[tuiButton] {
   transition: none !important;
   position: relative !important;
   cursor: pointer !important;
+  padding: 4px 12px !important;
+  line-height: 1.2 !important;
 }
 
-button[tuiButton][appearance="primary"],
-a[tuiButton][appearance="primary"] {
+.pixel-btn-l {
+  font-size: 1.25rem !important;
+  padding: 8px 16px !important;
+}
+
+.pixel-btn-m {
+  font-size: 1.1rem !important;
+  padding: 6px 14px !important;
+}
+
+.pixel-btn-s {
+  font-size: 0.9rem !important;
+  padding: 4px 10px !important;
+}
+
+.pixel-btn-primary {
   background-color: var(--pixel-accent-blue) !important;
   color: #ffffff !important;
 }
 
-button[tuiButton][appearance="secondary"],
-a[tuiButton][appearance="secondary"] {
+.pixel-btn-secondary {
   background-color: var(--pixel-card-bg) !important;
   color: var(--pixel-text-primary) !important;
 }
 
-button[tuiButton]:hover,
-a[tuiButton]:hover {
+.pixel-btn-outline {
+  background-color: transparent !important;
+  color: var(--pixel-text-primary) !important;
+}
+
+.pixel-btn-flat {
+  background-color: transparent !important;
+  color: var(--pixel-text-primary) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.pixel-btn-flat:hover {
+  border-color: var(--pixel-border-color) !important;
+  box-shadow: 2px 2px 0px var(--pixel-shadow-color) !important;
+  transform: translate(1px, 1px) !important;
+}
+
+.pixel-btn:not(.pixel-btn-flat):hover {
   transform: translate(2px, 2px) !important;
   box-shadow: 2px 2px 0px var(--pixel-shadow-color) !important;
 }
 
-button[tuiButton]:active,
-a[tuiButton]:active {
+.pixel-btn:not(.pixel-btn-flat):active {
   transform: translate(4px, 4px) !important;
   box-shadow: 0px 0px 0px transparent !important;
 }
 
-/* ─── Taiga Segmented control overrides ───────────────────────────── */
-tui-segmented {
-  border-radius: 0px !important;
-  border: 4px solid var(--pixel-border-color) !important;
-  background: var(--pixel-card-bg) !important;
-  overflow: hidden !important;
-  position: relative !important;
-}
-
-/* Remove Taiga UI's native sliding indicator pseudo-elements to avoid white gaps */
-tui-segmented::before,
-tui-segmented::after {
-  content: none !important;
-  display: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-tui-segmented button {
-  border: none !important;
-  background-clip: border-box !important;
-  clip-path: none !important;
-  border-radius: 0px !important;
-  font-family: "VT323", monospace !important;
-  font-size: 0.95rem !important;
-  border-right: 2px solid var(--pixel-border-color) !important;
-  color: var(--pixel-text-primary) !important;
-  transition: none !important;
-}
-
-tui-segmented button:last-child {
-  border-right: none !important;
-}
-
-tui-segmented button::before,
-tui-segmented button::after {
-  content: none !important;
-  display: none !important;
-}
-
-tui-segmented button.tui-segmented_active,
-tui-segmented button[data-active="true"],
-tui-segmented button[aria-selected="true"] {
-  background: var(--pixel-border-color) !important;
-  color: var(--pixel-bg) !important;
-}
-
-/* ─── Taiga Avatar Overrides ─────────────────────────────────────── */
-tui-avatar {
-  border-radius: 0px !important;
+/* ─── Retro Avatar (Pixelated borders & shadows) ─────────────────── */
+.pixel-avatar {
   border: 4px solid var(--pixel-border-color) !important;
   box-shadow: 4px 4px 0px var(--pixel-shadow-color) !important;
   background: var(--pixel-card-bg) !important;
-}
-
-@media (min-width: 768px) {
-  tui-avatar.profile-avatar {
-    width: 200px !important;
-    height: 200px !important;
-    min-width: 200px !important;
-    min-height: 200px !important;
-  }
 }
 
 /* ─── Skill Chips (NES-style items) ──────────────────────────────── */
