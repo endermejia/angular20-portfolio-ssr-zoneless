@@ -138,7 +138,7 @@ interface Project {
 export class HomeComponent {
   protected readonly github = signal('https://github.com/endermejia');
   protected readonly linkedin = signal(
-    'https://www.linkedin.com/in/endermejia/',
+    'https://www.linkedin.com/in/gabrimejia/',
   );
   protected readonly instagram = signal(
     'https://www.instagram.com/gabri.mejia/',
