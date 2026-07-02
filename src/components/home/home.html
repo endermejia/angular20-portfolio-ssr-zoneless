@@ -8,8 +8,8 @@
         [activeItemIndex]="langIndex()"
         (activeItemIndexChange)="onLangChange($event)"
       >
-        <button type="button">EN</button>
-        <button type="button">ES</button>
+        <button type="button" aria-label="English">EN</button>
+        <button type="button" aria-label="Español">ES</button>
       </tui-segmented>
 
       <!-- Theme segmented -->
@@ -47,6 +47,7 @@
           size="xxl"
           class="shadow-sm reveal reveal-left profile-avatar"
           appReveal
+          [attr.alt]="'Gabriel Mejía profile picture'"
         ></tui-avatar>
         <div
           class="flex-1 text-center md:text-left reveal reveal-right"
@@ -178,6 +179,7 @@
                 [src]="c.issuer === 'freeCodeCamp' ? fccLogo() : c.logo"
                 size="m"
                 class="shadow-sm"
+                [attr.alt]="c.issuer + ' logo'"
               ></tui-avatar>
               <div>
                 <div class="text-md md:text-lg font-bold text-[color:var(--pixel-accent-yellow)]">{{ c.title }}</div>
@@ -257,6 +259,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 iconStart="@tui.github"
+                [attr.aria-label]="'GitHub repository for ' + p.name"
               >
                 GitHub
               </a>
@@ -269,6 +272,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 iconStart="@tui.globe"
+                [attr.aria-label]="p.siteName + ' for ' + p.name"
               >
                 {{ p.siteName }}
               </a>
@@ -309,8 +313,9 @@
           @if (isMaximized(p.name)) {
           <div
             role="button"
-            tabindex="-1"
+            tabindex="0"
             class="fixed inset-0 bg-black/60 z-40 pointer-events-auto"
+            aria-label="Close maximized preview"
             (click)="toggleMaximize(p.name, $event)"
             (keydown)="toggleMaximize(p.name, $event)"
           ></div>
@@ -350,6 +355,7 @@
                     type="button"
                     class="w-5 h-5 md:w-4 md:h-4 bg-[#c0c0c0] hover:bg-[#e6e6e6] border-t border-l border-white border-b border-r border-[#808080] shadow-[0.5px_0.5px_0px_#000] flex items-center justify-center text-[10px] md:text-[8px] font-bold text-black focus:outline-none active:border-b active:border-r active:border-t-0 active:border-l-0 active:shadow-none active:translate-x-[0.5px] active:translate-y-[0.5px]"
                     (click)="toggleMinimize(p.name, $event)"
+                    aria-label="Minimize preview window"
                   >
                     _
                   </button>
@@ -357,6 +363,7 @@
                     type="button"
                     class="w-5 h-5 md:w-4 md:h-4 bg-[#c0c0c0] hover:bg-[#e6e6e6] border-t border-l border-white border-b border-r border-[#808080] shadow-[0.5px_0.5px_0px_#000] flex items-center justify-center text-[10px] md:text-[8px] font-bold text-black focus:outline-none active:border-b active:border-r active:border-t-0 active:border-l-0 active:shadow-none active:translate-x-[0.5px] active:translate-y-[0.5px]"
                     (click)="toggleMaximize(p.name, $event)"
+                    [attr.aria-label]="isMaximized(p.name) ? 'Restore preview window size' : 'Maximize preview window'"
                   >
                     {{ isMaximized(p.name) ? '🗗' : '🗖' }}
                   </button>
@@ -364,6 +371,7 @@
                     type="button"
                     class="w-5 h-5 md:w-4 md:h-4 bg-[#c0c0c0] hover:bg-[#e6e6e6] border-t border-l border-white border-b border-r border-[#808080] shadow-[0.5px_0.5px_0px_#000] flex items-center justify-center text-[10px] md:text-[8px] font-bold text-black focus:outline-none active:border-b active:border-r active:border-t-0 active:border-l-0 active:shadow-none active:translate-x-[0.5px] active:translate-y-[0.5px]"
                     (click)="closeWindow(p.name, $event)"
+                    aria-label="Close preview window"
                   >
                     ✕
                   </button>
@@ -401,6 +409,7 @@
                     [class.iframe-preview-maximized]="isMaximized(p.name)"
                     scrolling="no"
                     tabindex="-1"
+                    [title]="p.name + ' live preview'"
                   ></iframe>
                 </div>
               }
