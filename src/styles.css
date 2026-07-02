@@ -120,6 +120,19 @@ h1, h2, h3, h4, h5, h6, .pixel-title {
   border-color: var(--pixel-border-color) !important;
 }
 
+/* Pseudo-element to prevent hover jitter when card translates */
+.surface-card.interactive-card:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: -8px;
+  bottom: -8px;
+  background: transparent;
+  pointer-events: auto;
+  z-index: 1;
+}
+
 /* ─── Retro Buttons (NES-style overrides for Taiga UI button) ─────── */
 button[tuiButton], a[tuiButton] {
   display: inline-flex !important;
