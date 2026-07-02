@@ -8,8 +8,8 @@
 
 A high-performance, responsive, and SEO-friendly **Retro Arcade Developer Portfolio** template. Built from the ground up with the latest **Angular 22** technologies, featuring a retro 8-bit aesthetic, CRT screen filters, interactive Retro Windows mockups, and fully localized translations.
 
-| 🖥️ Desktop Preview | 📱 Mobile Preview |
-| :---: | :---: |
+|                  🖥️ Desktop Preview                  |                 📱 Mobile Preview                  |
+| :--------------------------------------------------: | :------------------------------------------------: |
 | ![Desktop Screenshot](public/screenshot-desktop.png) | ![Mobile Screenshot](public/screenshot-mobile.png) |
 
 With love, by Gabri Mejía ❤
@@ -21,6 +21,7 @@ With love, by Gabri Mejía ❤
 ## 🌟 Visual Theme: Retro Arcade & CRT Aesthetic
 
 This is not just another standard modern portfolio template. It stands out from the crowd with a **classic 80s/90s pixel arcade layout**:
+
 - **CRT Scanlines Effect**: A realistic, non-intrusive CRT monitor scanline overlay and flicker effect.
 - **Windows 98 Style Project Previews**: Interactive desktop windows where visitors can see live iframe previews, minimize, maximize, and interact with your projects directly in a retro-styled window wrapper.
 - **Custom Font Overhaul**: Styled with the beautiful 80s arcade terminal font `'VT323'` and `'Pixelify Sans'` for that nostalgic feel.
@@ -51,6 +52,7 @@ You need [Bun](https://bun.sh/) or [Node.js (v24.15.0 LTS or higher)](https://no
 ### Installation
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/endermejia/angular20-portfolio-ssr-zoneless.git
    cd angular20-portfolio-ssr-zoneless
@@ -134,13 +136,14 @@ You can customize this portfolio template to represent yourself in just a few mi
 
 ---
 
-
 ## 📜 Notes on Server-Side Rendering (SSR)
 
 When running the application with SSR, you may see the following message in the console:
+
 ```
 Not in browser environment, skipping map initialization
 ```
+
 This is expected behavior. The map initialization is intentionally skipped during server-side rendering because map libraries like Leaflet require browser-specific APIs that are not available in the server environment. The map will be properly initialized when the application runs in the browser.
 
 ---

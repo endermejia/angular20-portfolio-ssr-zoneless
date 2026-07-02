@@ -8,7 +8,7 @@
   --pixel-shadow-color: #8c8c9a; /* Solid gray drop shadow */
   --pixel-text-primary: #000000;
   --pixel-text-secondary: #2d2d34; /* High contrast secondary text */
-  
+
   --pixel-accent-red: #d81b1b;
   --pixel-accent-blue: #0066cc;
   --pixel-accent-green: #2e7d32;
@@ -37,7 +37,7 @@
 body {
   background-color: var(--pixel-bg) !important;
   color: var(--pixel-text-primary) !important;
-  font-family: 'Pixelify Sans', 'Inter', system-ui, sans-serif;
+  font-family: "Pixelify Sans", "Inter", system-ui, sans-serif;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   transition: background-color 0.2s steps(4);
@@ -49,10 +49,7 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%,
-    rgba(0, 0, 0, 0.25) 50%
-  );
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
   background-size: 100% 4px;
   opacity: 0.15;
 }
@@ -68,27 +65,51 @@ body {
 }
 
 @keyframes crt-flicker {
-  0% { opacity: 0.98; }
-  50% { opacity: 0.95; }
-  100% { opacity: 0.98; }
+  0% {
+    opacity: 0.98;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0.98;
+  }
 }
 
 /* ─── Typography overrides ────────────────────────────────────────── */
-h1, h2, h3, h4, h5, h6, .pixel-title {
-  font-family: 'VT323', monospace !important;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.pixel-title {
+  font-family: "VT323", monospace !important;
   line-height: 1.2 !important;
   letter-spacing: 0.05em !important;
   text-transform: uppercase;
 }
 
-h1 { font-size: 3.5rem !important; }
-h2 { font-size: 3rem !important; }
-h3 { font-size: 2.5rem !important; }
-h4 { font-size: 2rem !important; }
-h5, h6 { font-size: 1.5rem !important; }
+h1 {
+  font-size: 3.5rem !important;
+}
+h2 {
+  font-size: 3rem !important;
+}
+h3 {
+  font-size: 2.5rem !important;
+}
+h4 {
+  font-size: 2rem !important;
+}
+h5,
+h6 {
+  font-size: 1.5rem !important;
+}
 
 /* Phosphor Glow for headings in dark mode */
-[tuiTheme="dark"] h1, [tuiTheme="dark"] h3 {
+[tuiTheme="dark"] h1,
+[tuiTheme="dark"] h3 {
   text-shadow: 0 0 8px rgba(255, 0, 85, 0.3);
 }
 
@@ -116,7 +137,10 @@ h5, h6 { font-size: 1.5rem !important; }
   border-radius: 0px !important;
   background: var(--pixel-card-bg) !important;
   box-shadow: 6px 6px 0px var(--pixel-shadow-color) !important;
-  transition: transform 0.1s steps(2), box-shadow 0.1s steps(2), border-color 0.1s steps(2) !important;
+  transition:
+    transform 0.1s steps(2),
+    box-shadow 0.1s steps(2),
+    border-color 0.1s steps(2) !important;
   position: relative;
 }
 
@@ -128,7 +152,7 @@ h5, h6 { font-size: 1.5rem !important; }
 
 /* Pseudo-element to prevent hover jitter when card translates */
 .surface-card.interactive-card:hover::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -140,11 +164,12 @@ h5, h6 { font-size: 1.5rem !important; }
 }
 
 /* ─── Retro Buttons (NES-style overrides for Taiga UI button) ─────── */
-button[tuiButton], a[tuiButton] {
+button[tuiButton],
+a[tuiButton] {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-family: 'VT323', monospace !important;
+  font-family: "VT323", monospace !important;
   font-size: 1.1rem !important;
   text-transform: uppercase !important;
   border-radius: 0px !important;
@@ -155,22 +180,26 @@ button[tuiButton], a[tuiButton] {
   cursor: pointer !important;
 }
 
-button[tuiButton][appearance="primary"], a[tuiButton][appearance="primary"] {
+button[tuiButton][appearance="primary"],
+a[tuiButton][appearance="primary"] {
   background-color: var(--pixel-accent-blue) !important;
   color: #ffffff !important;
 }
 
-button[tuiButton][appearance="secondary"], a[tuiButton][appearance="secondary"] {
+button[tuiButton][appearance="secondary"],
+a[tuiButton][appearance="secondary"] {
   background-color: var(--pixel-card-bg) !important;
   color: var(--pixel-text-primary) !important;
 }
 
-button[tuiButton]:hover, a[tuiButton]:hover {
+button[tuiButton]:hover,
+a[tuiButton]:hover {
   transform: translate(2px, 2px) !important;
   box-shadow: 2px 2px 0px var(--pixel-shadow-color) !important;
 }
 
-button[tuiButton]:active, a[tuiButton]:active {
+button[tuiButton]:active,
+a[tuiButton]:active {
   transform: translate(4px, 4px) !important;
   box-shadow: 0px 0px 0px transparent !important;
 }
@@ -198,7 +227,7 @@ tui-segmented button {
   background-clip: border-box !important;
   clip-path: none !important;
   border-radius: 0px !important;
-  font-family: 'VT323', monospace !important;
+  font-family: "VT323", monospace !important;
   font-size: 0.95rem !important;
   border-right: 2px solid var(--pixel-border-color) !important;
   color: var(--pixel-text-primary) !important;
@@ -245,7 +274,7 @@ tui-avatar {
   border: 2px solid var(--pixel-border-color) !important;
   border-radius: 0px !important;
   color: var(--pixel-text-primary) !important;
-  font-family: 'VT323', monospace !important;
+  font-family: "VT323", monospace !important;
   font-size: 0.9rem !important;
   padding: 4px 8px !important;
   box-shadow: 2px 2px 0px var(--pixel-border-color) !important;
@@ -259,7 +288,7 @@ tui-avatar {
 }
 
 .skills-list li::before {
-  content: '' !important;
+  content: "" !important;
   position: absolute;
   left: 0;
   top: 0.6em;
@@ -270,14 +299,20 @@ tui-avatar {
 }
 
 /* ─── Disable standard reveal animation transitions ──────────────── */
-.reveal, .reveal-left, .reveal-right, .stagger-children > * {
+.reveal,
+.reveal-left,
+.reveal-right,
+.stagger-children > * {
   transition: none !important;
   opacity: 1 !important;
   transform: none !important;
 }
 
 /* ─── High Contrast Text Overrides for Pixel Fonts ───────────────── */
-.opacity-50, .opacity-60, .opacity-70, .text-secondary {
+.opacity-50,
+.opacity-60,
+.opacity-70,
+.text-secondary {
   color: var(--pixel-text-secondary) !important;
   opacity: 1 !important;
 }
@@ -292,7 +327,9 @@ tui-avatar {
 }
 
 /* Ensure no horizontal scroll */
-body, tui-root, section {
+body,
+tui-root,
+section {
   overflow-x: hidden !important;
 }
 
@@ -328,7 +365,12 @@ body, tui-root, section {
 }
 
 /* Ensure all buttons, links and interactive items have a hand pointer cursor on hover */
-button, a, [role="button"], select, input[type="button"], input[type="submit"] {
+button,
+a,
+[role="button"],
+select,
+input[type="button"],
+input[type="submit"] {
   cursor: pointer !important;
 }
 

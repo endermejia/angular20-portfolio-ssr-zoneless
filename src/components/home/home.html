@@ -18,8 +18,19 @@
         [activeItemIndex]="themeIndex()"
         (activeItemIndexChange)="onThemeChange($event)"
       >
-        <button type="button" aria-label="Light Mode" class="flex items-center justify-center p-1.5">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square">
+        <button
+          type="button"
+          aria-label="Light Mode"
+          class="flex items-center justify-center p-1.5"
+        >
+          <svg
+            class="w-3.5 h-3.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="square"
+          >
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="4"></line>
             <line x1="12" y1="20" x2="12" y2="23"></line>
@@ -31,8 +42,19 @@
             <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"></line>
           </svg>
         </button>
-        <button type="button" aria-label="Dark Mode" class="flex items-center justify-center p-1.5">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square">
+        <button
+          type="button"
+          aria-label="Dark Mode"
+          class="flex items-center justify-center p-1.5"
+        >
+          <svg
+            class="w-3.5 h-3.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="square"
+          >
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
@@ -96,7 +118,9 @@
 
     <!-- ── Experience ─────────────────────────────────────────────────── -->
     <div class="mt-20 reveal" id="experience" appReveal>
-      <h3 class="text-xl font-bold tracking-tight px-2 text-[color:var(--pixel-accent-blue)]">
+      <h3
+        class="text-xl font-bold tracking-tight px-2 text-[color:var(--pixel-accent-blue)]"
+      >
         {{ 'home.experience.title' | translate }}
       </h3>
       <div class="mt-8 grid gap-6 stagger-children">
@@ -109,19 +133,29 @@
           (click.zoneless)="toggleExp(exp, $event)"
           (keydown.zoneless)="onExpKeydown($event, exp)"
         >
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-              <div>
-                <div class="text-lg md:text-xl font-bold text-[color:var(--pixel-accent-yellow)]">{{ exp.role }}</div>
-                <div class="text-md md:text-lg opacity-80 font-semibold">{{ exp.company }}</div>
+          <div
+            class="flex flex-col md:flex-row md:items-start md:justify-between gap-4"
+          >
+            <div>
+              <div
+                class="text-lg md:text-xl font-bold text-[color:var(--pixel-accent-yellow)]"
+              >
+                {{ exp.role }}
               </div>
-              <div class="text-left md:text-right text-xs md:text-sm font-mono shrink-0">
-                {{ exp.startDate | expDate }} - {{ exp.endDate ? (exp.endDate |
-                expDate) : ('home.experience.present' | translate) }}
-                <div class="text-[10px] md:text-xs opacity-80 mt-1">
-                  {{ exp.startDate | expDuration:exp.endDate }}
-                </div>
+              <div class="text-md md:text-lg opacity-80 font-semibold">
+                {{ exp.company }}
               </div>
             </div>
+            <div
+              class="text-left md:text-right text-xs md:text-sm font-mono shrink-0"
+            >
+              {{ exp.startDate | expDate }} - {{ exp.endDate ? (exp.endDate |
+              expDate) : ('home.experience.present' | translate) }}
+              <div class="text-[10px] md:text-xs opacity-80 mt-1">
+                {{ exp.startDate | expDuration:exp.endDate }}
+              </div>
+            </div>
+          </div>
           @if (isExpanded(exp)) {
           <div
             class="mt-6 border-t border-[color:var(--tui-border-normal)] pt-6 animation-fade-in"
@@ -167,13 +201,17 @@
 
     <!-- ── Certifications ─────────────────────────────────────────────── -->
     <div class="mt-20 reveal" id="certifications" appReveal>
-      <h3 class="text-xl font-bold tracking-tight px-2 text-[color:var(--pixel-accent-blue)]">
+      <h3
+        class="text-xl font-bold tracking-tight px-2 text-[color:var(--pixel-accent-blue)]"
+      >
         {{ 'home.certifications.title' | translate }}
       </h3>
       <div class="mt-8 grid gap-6 stagger-children">
         @for (c of certifications(); track c.title + c.issueDate) {
         <article class="p-6 rounded-2xl surface-card">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+          >
             <div class="flex items-center gap-4">
               <tui-avatar
                 [src]="c.issuer === 'freeCodeCamp' ? fccLogo() : c.logo"
@@ -182,11 +220,19 @@
                 [attr.alt]="c.issuer + ' logo'"
               ></tui-avatar>
               <div>
-                <div class="text-md md:text-lg font-bold text-[color:var(--pixel-accent-yellow)]">{{ c.title }}</div>
-                <div class="text-xs md:text-sm font-semibold">{{ c.issuer }}</div>
+                <div
+                  class="text-md md:text-lg font-bold text-[color:var(--pixel-accent-yellow)]"
+                >
+                  {{ c.title }}
+                </div>
+                <div class="text-xs md:text-sm font-semibold">
+                  {{ c.issuer }}
+                </div>
               </div>
             </div>
-            <div class="text-left md:text-right text-xs md:text-sm font-mono shrink-0">
+            <div
+              class="text-left md:text-right text-xs md:text-sm font-mono shrink-0"
+            >
               {{ c.issueDate }}
             </div>
           </div>
@@ -222,11 +268,13 @@
 
     <!-- ── Projects ───────────────────────────────────────────────────── -->
     <div class="mt-24 reveal" id="projects" appReveal>
-      <h3 class="text-xl font-bold tracking-tight px-2 text-[color:var(--pixel-accent-blue)]">
+      <h3
+        class="text-xl font-bold tracking-tight px-2 text-[color:var(--pixel-accent-blue)]"
+      >
         {{ 'home.projects.title' | translate }}
       </h3>
       <div class="mt-10 grid gap-8 md:grid-cols-2 stagger-children">
-        @for (p of visibleProjects(); track p.name) {
+        @for (p of visibleProjects(); track p.name) { @defer (on viewport) {
         <article
           class="project-card group rounded-2xl surface-card overflow-hidden flex flex-col md:flex-row md:col-span-2 min-h-[500px]"
           [class.project-card-maximized]="isMaximized(p.name)"
@@ -248,7 +296,11 @@
             [class.text-white]="p.bgImage"
           >
             <div class="flex items-center justify-between gap-4">
-              <div class="font-black text-lg text-[color:var(--pixel-accent-yellow)]">{{ p.name }}</div>
+              <div
+                class="font-black text-lg text-[color:var(--pixel-accent-yellow)]"
+              >
+                {{ p.name }}
+              </div>
             </div>
             <div class="mt-6 flex flex-wrap gap-3">
               <a
@@ -276,8 +328,7 @@
               >
                 {{ p.siteName }}
               </a>
-              }
-              @if (p.siteUrl && isClosed(p.name)) {
+              } @if (p.siteUrl && isClosed(p.name)) {
               <button
                 tuiButton
                 appearance="primary"
@@ -345,7 +396,9 @@
               <div
                 class="h-7 bg-gradient-to-r from-[#000080] to-[#1084d0] text-white flex items-center justify-between px-1.5 py-0.5 select-none"
               >
-                <div class="flex items-center gap-1.5 text-[10px] md:text-[9px] font-bold font-mono tracking-wide">
+                <div
+                  class="flex items-center gap-1.5 text-[10px] md:text-[9px] font-bold font-mono tracking-wide"
+                >
                   <span>💻</span>
                   <span>{{ p.name }}</span>
                 </div>
@@ -379,45 +432,55 @@
               </div>
 
               @if (!isMinimized(p.name)) {
-                <!-- Win98 Menu Bar -->
-                <div
-                  class="hidden md:flex h-5 bg-[#c0c0c0] border-b border-[#808080] items-center px-2 gap-3 text-[9px] select-none text-black font-mono border-t border-white"
-                >
-                  <span><u>F</u>ile</span>
-                  <span><u>E</u>dit</span>
-                  <span><u>V</u>iew</span>
-                  <span><u>G</u>o</span>
-                  <span><u>F</u>avorites</span>
-                  <span><u>H</u>elp</span>
-                </div>
+              <!-- Win98 Menu Bar -->
+              <div
+                class="hidden md:flex h-5 bg-[#c0c0c0] border-b border-[#808080] items-center px-2 gap-3 text-[9px] select-none text-black font-mono border-t border-white"
+              >
+                <span><u>F</u>ile</span>
+                <span><u>E</u>dit</span>
+                <span><u>V</u>iew</span>
+                <span><u>G</u>o</span>
+                <span><u>F</u>avorites</span>
+                <span><u>H</u>elp</span>
+              </div>
 
-                <!-- Win98 Address Bar -->
+              <!-- Win98 Address Bar -->
+              <div
+                class="h-7 bg-[#c0c0c0] border-b border-[#808080] flex items-center px-1.5 gap-2 text-[9px] font-mono text-black"
+              >
+                <span class="opacity-70">Address:</span>
                 <div
-                  class="h-7 bg-[#c0c0c0] border-b border-[#808080] flex items-center px-1.5 gap-2 text-[9px] font-mono text-black"
+                  class="flex-1 bg-white border-t border-l border-[#808080] border-b border-r border-white shadow-[0.5px_0.5px_0px_#fff] px-1 text-[8px] truncate text-gray-700 select-all py-0.5"
                 >
-                  <span class="opacity-70">Address:</span>
-                  <div class="flex-1 bg-white border-t border-l border-[#808080] border-b border-r border-white shadow-[0.5px_0.5px_0px_#fff] px-1 text-[8px] truncate text-gray-700 select-all py-0.5">
-                    {{ p.siteUrl }}
-                  </div>
+                  {{ p.siteUrl }}
                 </div>
+              </div>
 
-                <!-- Content Area (iframe) -->
-                <div class="flex-1 bg-white border-t border-l border-[#808080] border-b border-r border-white shadow-[0.5px_0.5px_0px_#fff] relative m-1 overflow-hidden">
-                  <iframe
-                    [src]="p.siteUrl | safeUrl"
-                    [class.iframe-preview-normal]="!isMaximized(p.name)"
-                    [class.iframe-preview-maximized]="isMaximized(p.name)"
-                    scrolling="no"
-                    tabindex="-1"
-                    [title]="p.name + ' live preview'"
-                  ></iframe>
-                </div>
+              <!-- Content Area (iframe) -->
+              <div
+                class="flex-1 bg-white border-t border-l border-[#808080] border-b border-r border-white shadow-[0.5px_0.5px_0px_#fff] relative m-1 overflow-hidden"
+              >
+                <iframe
+                  [src]="p.siteUrl | safeUrl"
+                  [class.iframe-preview-normal]="!isMaximized(p.name)"
+                  [class.iframe-preview-maximized]="isMaximized(p.name)"
+                  scrolling="no"
+                  tabindex="-1"
+                  [title]="p.name + ' live preview'"
+                ></iframe>
+              </div>
               }
             </div>
           </div>
           }
         </article>
-        }
+        } @placeholder {
+        <div
+          class="project-card-placeholder w-full md:col-span-2 min-h-[500px] border-4 border-dashed border-[color:var(--pixel-border-color)] bg-[color:var(--pixel-card-bg)] flex items-center justify-center font-mono text-xs opacity-50 select-none"
+        >
+          Loading Project...
+        </div>
+        } }
       </div>
       @if (projects().length > 4) {
       <div class="mt-12 text-center">
@@ -427,7 +490,8 @@
           size="m"
           (click)="toggleShowAllProjects()"
         >
-          {{ (showAllProjects() ? 'common.show_less' : 'common.show_more') | translate }}
+          {{ (showAllProjects() ? 'common.show_less' : 'common.show_more') |
+          translate }}
         </button>
       </div>
       }
@@ -435,7 +499,9 @@
 
     <!-- ── Contact ────────────────────────────────────────────────────── -->
     <div class="mt-32 mb-16 text-center reveal" id="contact" appReveal>
-      <h3 class="text-xl font-bold tracking-tight text-[color:var(--pixel-accent-blue)]">
+      <h3
+        class="text-xl font-bold tracking-tight text-[color:var(--pixel-accent-blue)]"
+      >
         {{ 'home.contact.title' | translate }}
       </h3>
       <p class="mt-4 text-lg opacity-60 max-w-2xl mx-auto">

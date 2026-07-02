@@ -11,7 +11,7 @@
     "serve:ssr:angular22": "node dist/angular22/server/server.mjs",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
-    "format": "prettier --write ./src"
+    "format": "prettier --write ."
   },
   "private": true,
   "dependencies": {

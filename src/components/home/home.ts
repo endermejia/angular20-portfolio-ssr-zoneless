@@ -237,7 +237,14 @@ export class HomeComponent {
       startDate: '2025-06-01',
       location: 'Principado de Asturias',
       descriptionKey: 'home.experience.inetum',
-      skills: ['Angular 22', 'SSR', 'Zoneless', 'Angular Material', 'i18n', 'Signals'],
+      skills: [
+        'Angular 22',
+        'SSR',
+        'Zoneless',
+        'Angular Material',
+        'i18n',
+        'Signals',
+      ],
     },
     {
       company: 'CONVOTIS Iberia',
@@ -381,7 +388,10 @@ export class HomeComponent {
       tags: [
         { name: 'Next.js', icon: 'https://cdn.simpleicons.org/nextdotjs' },
         { name: 'React', icon: 'https://cdn.simpleicons.org/react' },
-        { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss' },
+        {
+          name: 'Tailwind CSS',
+          icon: 'https://cdn.simpleicons.org/tailwindcss',
+        },
         { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript' },
       ],
     },
@@ -392,7 +402,10 @@ export class HomeComponent {
       siteName: 'sergio-solbes.vercel.app',
       tags: [
         { name: 'Astro', icon: 'https://cdn.simpleicons.org/astro' },
-        { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss' },
+        {
+          name: 'Tailwind CSS',
+          icon: 'https://cdn.simpleicons.org/tailwindcss',
+        },
         { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript' },
       ],
     },
@@ -404,7 +417,10 @@ export class HomeComponent {
       tags: [
         { name: 'Next.js', icon: 'https://cdn.simpleicons.org/nextdotjs' },
         { name: 'React', icon: 'https://cdn.simpleicons.org/react' },
-        { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss' },
+        {
+          name: 'Tailwind CSS',
+          icon: 'https://cdn.simpleicons.org/tailwindcss',
+        },
         { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript' },
       ],
     },
