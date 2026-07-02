@@ -147,6 +147,88 @@ export class HomeComponent {
 
   protected readonly global = inject(GlobalData);
 
+  // Windows 98 Window State Signals
+  private readonly minimizedProjects = signal<Set<string>>(new Set());
+  private readonly maximizedProjects = signal<Set<string>>(new Set());
+  private readonly closedProjects = signal<Set<string>>(new Set());
+
+  protected isMinimized(projectName: string): boolean {
+    return this.minimizedProjects().has(projectName);
+  }
+
+  protected isMaximized(projectName: string): boolean {
+    return this.maximizedProjects().has(projectName);
+  }
+
+  protected isClosed(projectName: string): boolean {
+    return this.closedProjects().has(projectName);
+  }
+
+  protected toggleMinimize(projectName: string, event?: Event): void {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    const nextMin = new Set(this.minimizedProjects());
+    if (nextMin.has(projectName)) {
+      nextMin.delete(projectName);
+    } else {
+      nextMin.add(projectName);
+      // Un-maximize when minimizing
+      const nextMax = new Set(this.maximizedProjects());
+      nextMax.delete(projectName);
+      this.maximizedProjects.set(nextMax);
+    }
+    this.minimizedProjects.set(nextMin);
+  }
+
+  protected toggleMaximize(projectName: string, event?: Event): void {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    const nextMax = new Set(this.maximizedProjects());
+    if (nextMax.has(projectName)) {
+      nextMax.delete(projectName);
+    } else {
+      nextMax.add(projectName);
+      // Un-minimize when maximizing
+      const nextMin = new Set(this.minimizedProjects());
+      nextMin.delete(projectName);
+      this.minimizedProjects.set(nextMin);
+    }
+    this.maximizedProjects.set(nextMax);
+  }
+
+  protected closeWindow(projectName: string, event?: Event): void {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    const nextClosed = new Set(this.closedProjects());
+    nextClosed.add(projectName);
+    this.closedProjects.set(nextClosed);
+
+    // Reset maximize and minimize states upon closing
+    const nextMax = new Set(this.maximizedProjects());
+    nextMax.delete(projectName);
+    this.maximizedProjects.set(nextMax);
+
+    const nextMin = new Set(this.minimizedProjects());
+    nextMin.delete(projectName);
+    this.minimizedProjects.set(nextMin);
+  }
+
+  protected restoreWindow(projectName: string, event?: Event): void {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    const next = new Set(this.closedProjects());
+    next.delete(projectName);
+    this.closedProjects.set(next);
+  }
+
   protected readonly experiences = signal<Experience[]>([
     {
       company: 'Inetum',
@@ -155,7 +237,7 @@ export class HomeComponent {
       startDate: '2025-06-01',
       location: 'Principado de Asturias',
       descriptionKey: 'home.experience.inetum',
-      skills: ['Angular 22', 'SSR', 'Zoneless', 'Taiga UI', 'i18n', 'Signals'],
+      skills: ['Angular 22', 'SSR', 'Zoneless', 'Angular Material', 'i18n', 'Signals'],
     },
     {
       company: 'CONVOTIS Iberia',
@@ -211,19 +293,31 @@ export class HomeComponent {
     this.showAllExperiences.update((val) => !val);
   }
 
+  protected readonly showAllProjects = signal(false);
+
+  protected readonly visibleProjects = computed(() => {
+    return this.showAllProjects()
+      ? this.projects()
+      : this.projects().slice(0, 3);
+  });
+
+  protected toggleShowAllProjects(): void {
+    this.showAllProjects.update((val) => !val);
+  }
+
   protected readonly certifications = signal<Certification[]>([
     {
-      title: 'Legacy Front End Development',
+      title: 'Legacy Responsive Web Design',
       issuer: 'freeCodeCamp',
-      issueDate: 'Jan 2022',
+      issueDate: 'Oct 2020',
       credentialUrl:
-        'https://www.freecodecamp.org/certification/endermejia/legacy-front-end',
-      skills: ['HTML', 'CSS', 'JavaScript', 'jQuery', 'Bootstrap'],
+        'https://www.freecodecamp.org/certification/endermejia/responsive-web-design',
+      skills: ['HTML', 'CSS', 'Responsive Design'],
     },
     {
       title: 'JavaScript Algorithms and Data Structures',
       issuer: 'freeCodeCamp',
-      issueDate: 'Dec 2021',
+      issueDate: 'Oct 2020',
       credentialUrl:
         'https://www.freecodecamp.org/certification/endermejia/javascript-algorithms-and-data-structures',
       skills: ['JavaScript', 'Algorithms', 'Data Structures'],
@@ -277,6 +371,41 @@ export class HomeComponent {
       tags: [
         { name: 'Angular', icon: 'https://cdn.simpleicons.org/angular' },
         { name: 'Angular Material' },
+      ],
+    },
+    {
+      name: 'Reform Caravan',
+      repoUrl: 'https://github.com/endermejia/reformcaravan',
+      siteUrl: 'https://reformcaravan.vercel.app/',
+      siteName: 'reformcaravan.vercel.app',
+      tags: [
+        { name: 'Next.js', icon: 'https://cdn.simpleicons.org/nextdotjs' },
+        { name: 'React', icon: 'https://cdn.simpleicons.org/react' },
+        { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss' },
+        { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript' },
+      ],
+    },
+    {
+      name: 'Sergio Solbes',
+      repoUrl: 'https://github.com/endermejia/sergio-solbes',
+      siteUrl: 'https://sergio-solbes.vercel.app/',
+      siteName: 'sergio-solbes.vercel.app',
+      tags: [
+        { name: 'Astro', icon: 'https://cdn.simpleicons.org/astro' },
+        { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss' },
+        { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript' },
+      ],
+    },
+    {
+      name: 'Gripco',
+      repoUrl: 'https://github.com/endermejia/gripco',
+      siteUrl: 'https://gripco.vercel.app/',
+      siteName: 'gripco.vercel.app',
+      tags: [
+        { name: 'Next.js', icon: 'https://cdn.simpleicons.org/nextdotjs' },
+        { name: 'React', icon: 'https://cdn.simpleicons.org/react' },
+        { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss' },
+        { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript' },
       ],
     },
   ]);

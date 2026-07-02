@@ -48,7 +48,7 @@ export class GlobalData {
   });
 
   selectedLanguage: WritableSignal<'es' | 'en'> = signal('es');
-  selectedTheme: WritableSignal<'light' | 'dark'> = signal('dark');
+  selectedTheme: WritableSignal<'light' | 'dark'> = signal('light');
 
   // Computed signal for Taiga UI language based on selectedLanguage
   tuiLanguage: Signal<
