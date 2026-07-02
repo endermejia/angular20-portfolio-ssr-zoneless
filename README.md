@@ -134,32 +134,6 @@ You can customize this portfolio template to represent yourself in just a few mi
 
 ---
 
-## 🔍 GitHub SEO Optimization & Configuration
-
-To make this repository rank high when users search for **"portfolio angular"** or **"angular portfolio"** on GitHub:
-
-1. **Repository Description**:
-   > 🎮 Retro Arcade Developer Portfolio template featuring Angular 22, SSR (Server-Side Rendering), Zoneless change detection, Signals, Taiga UI, and Tailwind CSS 4. Optimized for high performance and perfect SEO!
-2. **Repository Topics / Tags**:
-   Add the following topics in your GitHub repository settings:
-   - `angular`
-   - `angular-portfolio`
-   - `portfolio`
-   - `portfolio-template`
-   - `retro-theme`
-   - `retro-portfolio`
-   - `angular22`
-   - `ssr`
-   - `zoneless`
-   - `signals`
-   - `taiga-ui`
-   - `tailwindcss`
-   - `frontend-portfolio`
-   - `developer-portfolio`
-3. **Repository Homepage URL**:
-   Set the website link to: `https://gabri-mejia.vercel.app/home`
-
----
 
 ## 📜 Notes on Server-Side Rendering (SSR)
 
