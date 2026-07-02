@@ -350,6 +350,8 @@
                   [src]="t.icon"
                   [alt]="t.name"
                   class="w-4 h-4 object-contain"
+                  loading="lazy"
+                  fetchpriority="low"
                 />
                 } {{ t.name }}
               </span>
@@ -363,12 +365,9 @@
           <!-- Fixed Backdrop for maximized window -->
           @if (isMaximized(p.name)) {
           <div
-            role="button"
-            tabindex="0"
+            role="presentation"
             class="fixed inset-0 bg-black/60 z-40 pointer-events-auto"
-            aria-label="Close maximized preview"
             (click)="toggleMaximize(p.name, $event)"
-            (keydown)="toggleMaximize(p.name, $event)"
           ></div>
           }
 
@@ -516,6 +515,7 @@
           target="_blank"
           rel="noopener noreferrer"
           iconStart="@tui.linkedin"
+          [attr.aria-label]="('aria.open_linkedin_profile' | translate)"
         >
           {{ 'common.linkedin' | translate }}
         </a>
@@ -527,6 +527,7 @@
           target="_blank"
           rel="noopener noreferrer"
           iconStart="@tui.github"
+          [attr.aria-label]="('aria.open_github_profile' | translate)"
         >
           {{ 'common.github' | translate }}
         </a>
@@ -538,6 +539,7 @@
           target="_blank"
           rel="noopener noreferrer"
           iconStart="@tui.instagram"
+          [attr.aria-label]="('aria.open_instagram_profile' | translate)"
         >
           {{ 'common.instagram' | translate }}
         </a>
