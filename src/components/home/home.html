@@ -1,4 +1,4 @@
-<section class="w-full h-full">
+<main class="w-full h-full">
   <div class="max-w-5xl mx-auto px-4 pt-4 pb-10 md:py-20" id="profile">
     <!-- ── Settings bar (idioma + tema) ──────────────────────────────── -->
     <div class="flex justify-end items-center gap-3 mb-4 md:mb-8">
@@ -141,11 +141,11 @@
 
     <!-- ── Experience ─────────────────────────────────────────────────── -->
     <div class="mt-20 reveal" id="experience" appReveal>
-      <h3
+      <h2
         class="text-xl font-bold tracking-tight px-2 text-[color:var(--pixel-accent-blue)]"
       >
         {{ 'home.experience.title' | translate }}
-      </h3>
+      </h2>
       <div class="mt-8 grid gap-6 stagger-children">
         @for (exp of visibleExperiences(); track exp.company + exp.startDate) {
         <article
@@ -153,8 +153,8 @@
           role="button"
           tabindex="0"
           [attr.aria-expanded]="isExpanded(exp)"
-          (click.zoneless)="toggleExp(exp, $event)"
-          (keydown.zoneless)="onExpKeydown($event, exp)"
+          (click)="toggleExp(exp, $event)"
+          (keydown)="onExpKeydown($event, exp)"
         >
           <div
             class="flex flex-col md:flex-row md:items-start md:justify-between gap-4"
@@ -222,11 +222,11 @@
 
     <!-- ── Certifications ─────────────────────────────────────────────── -->
     <div class="mt-20 reveal" id="certifications" appReveal>
-      <h3
+      <h2
         class="text-xl font-bold tracking-tight px-2 text-[color:var(--pixel-accent-blue)]"
       >
         {{ 'home.certifications.title' | translate }}
-      </h3>
+      </h2>
       <div class="mt-8 grid gap-6 stagger-children">
         @for (c of certifications(); track c.title + c.issueDate) {
         <article class="p-6 rounded-2xl surface-card">
@@ -295,11 +295,11 @@
 
     <!-- ── Projects ───────────────────────────────────────────────────── -->
     <div class="mt-24 reveal" id="projects" appReveal>
-      <h3
+      <h2
         class="text-xl font-bold tracking-tight px-2 text-[color:var(--pixel-accent-blue)]"
       >
         {{ 'home.projects.title' | translate }}
-      </h3>
+      </h2>
       <div class="mt-10 grid gap-8 md:grid-cols-2 stagger-children">
         @for (p of visibleProjects(); track p.name) { @defer (on viewport) {
         <article
@@ -525,11 +525,11 @@
 
     <!-- ── Contact ────────────────────────────────────────────────────── -->
     <div class="mt-32 mb-16 text-center reveal" id="contact" appReveal>
-      <h3
+      <h2
         class="text-xl font-bold tracking-tight text-[color:var(--pixel-accent-blue)]"
       >
         {{ 'home.contact.title' | translate }}
-      </h3>
+      </h2>
       <p class="mt-4 text-lg opacity-60 max-w-2xl mx-auto">
         {{ 'home.contact.text' | translate }}
       </p>
@@ -582,4 +582,4 @@
       <p class="mt-1">Built with Angular 22 & Zoneless</p>
     </footer>
   </div>
-</section>
+</main>
