@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve --hmr=false",
     "start:hmr": "ng serve",
-    "build": "ng build",
+    "build": "ng build && node post-build.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:angular22": "node dist/angular22/server/server.mjs",
