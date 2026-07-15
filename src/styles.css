@@ -309,12 +309,11 @@ h6 {
   box-shadow: 1px 1px 0px var(--pixel-border-color);
 }
 
-/* ─── Disable standard reveal animation transitions ──────────────── */
+/* ─── Disable legacy reveal transitions (kept for compat) ───────── */
 .reveal,
 .reveal-left,
 .reveal-right,
 .stagger-children > * {
-  transition: none !important;
   opacity: 1 !important;
   transform: none !important;
 }
@@ -498,6 +497,40 @@ article[role="button"]:active {
   opacity: 0.2;
   margin: 0;
 }
+
+/* ─── Page Load Slide-In Animations ─────────────────────────────── */
+@keyframes slide-in-top {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-bottom {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bento-cell {
+  animation-fill-mode: both;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(8);
+}
+
+/* Row 1: slide from top */
+.bento-cell:nth-child(1) { animation-name: slide-in-top; animation-delay: 0s; }
+.bento-cell:nth-child(2) { animation-name: slide-in-top; animation-delay: 0.1s; }
+.bento-cell:nth-child(3) { animation-name: slide-in-top; animation-delay: 0.2s; }
+
+/* Row 2: slide from bottom */
+.bento-cell:nth-child(4) { animation-name: slide-in-bottom; animation-delay: 0.25s; }
+.bento-cell:nth-child(5) { animation-name: slide-in-bottom; animation-delay: 0.35s; }
+.bento-cell:nth-child(6) { animation-name: slide-in-bottom; animation-delay: 0.45s; }
 
 /* ─── Project Carousel Navigation ───────────────────────────────── */
 .project-nav-btn {
