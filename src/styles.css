@@ -85,7 +85,7 @@ h5,
 h6,
 .pixel-title {
   font-family: "VT323", monospace !important;
-  line-height: 1.2 !important;
+  line-height: 1 !important;
   letter-spacing: 0.05em !important;
   text-transform: uppercase;
   overflow-wrap: break-word;
@@ -338,10 +338,12 @@ h6 {
 }
 
 /* Ensure no horizontal scroll */
-body,
-tui-root,
-section {
-  overflow-x: hidden !important;
+@media (min-width: 768px) {
+  body,
+  tui-root,
+  section {
+    overflow-x: hidden !important;
+  }
 }
 
 /* Custom scrollbar pixelated look */
@@ -358,21 +360,21 @@ section {
   border: 2px solid var(--pixel-bg);
 }
 
-/* Maximized Window & Parent states to bypass JIT compilation limitations */
-.project-card-maximized {
-  z-index: 9999 !important;
-  overflow: visible !important;
+/* Project preview scrollbar */
+.project-preview ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
-
-.window-maximized-parent {
-  z-index: 9999 !important;
-  position: static !important;
-  overflow: visible !important;
+.project-preview ::-webkit-scrollbar-track {
+  background: #e0e0e0;
+  border: 1px solid var(--pixel-border-color);
 }
-
-.window-maximized {
-  position: fixed !important;
-  z-index: 9999 !important;
+.project-preview ::-webkit-scrollbar-thumb {
+  background: var(--pixel-accent-blue);
+  border: 1px solid var(--pixel-border-color);
+}
+.project-preview ::-webkit-scrollbar-thumb:hover {
+  background: var(--pixel-accent-yellow);
 }
 
 /* Ensure all buttons, links and interactive items have a hand pointer cursor on hover */
@@ -385,21 +387,265 @@ input[type="submit"] {
   cursor: pointer !important;
 }
 
-/* Iframe preview scaling in normal window mode */
-.iframe-preview-normal {
-  width: 142.85% !important;
-  height: 142.85% !important;
-  transform: scale(0.7) !important;
-  transform-origin: top left !important;
-  border: none !important;
-  background: #ffffff !important;
+/* Focus styles for settings buttons */
+button:focus-visible {
+  outline: 3px solid var(--pixel-accent-yellow) !important;
+  outline-offset: -3px !important;
+  z-index: 1;
 }
 
-.iframe-preview-maximized {
-  width: 100% !important;
-  height: 100% !important;
-  transform: scale(1) !important;
-  transform-origin: top left !important;
-  border: none !important;
-  background: #ffffff !important;
+/* Experience article hover */
+article[role="button"] {
+  transition: transform 0.1s steps(2), box-shadow 0.1s steps(2);
+}
+
+article[role="button"]:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px var(--pixel-shadow-color);
+}
+
+article[role="button"]:active {
+  transform: translate(0, 0);
+  box-shadow: 0px 0px 0px transparent;
+}
+
+/* ─── Bento Grid Layout ─────────────────────────────────────────── */
+.bento-viewport {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .bento-viewport {
+    height: 100vh;
+    overflow-y: hidden;
+    padding: 1rem;
+  }
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto 1.8fr;
+    flex: 1;
+    min-height: 0;
+  }
+}
+
+/* Medium screens scaling */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .bento-viewport {
+    padding: 0.5rem;
+    transform: scale(0.92);
+    transform-origin: top center;
+  }
+  
+  .bento-cell {
+    box-shadow: 4px 4px 0px var(--pixel-shadow-color);
+  }
+}
+
+.bento-cell {
+  border: 4px solid var(--pixel-border-color);
+  background: var(--pixel-card-bg);
+  box-shadow: 6px 6px 0px var(--pixel-shadow-color);
+  position: relative;
+  min-height: 0;
+  transition: none;
+}
+
+@media (min-width: 768px) {
+  .bento-cell {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+/* Pixel corner decorations */
+.bento-cell::before,
+.bento-cell::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 3px solid var(--pixel-border-color);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.bento-cell::before { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+.bento-cell::after { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+
+/* Span variants */
+.bento-span-2 { grid-column: span 1; }
+@media (min-width: 768px) { .bento-span-2 { grid-column: span 2; } }
+
+/* ─── Pixel Decorations ─────────────────────────────────────────── */
+.pixel-divider {
+  border: none;
+  border-top: 2px dashed var(--pixel-border-color);
+  opacity: 0.2;
+  margin: 0;
+}
+
+/* ─── Project Carousel Navigation ───────────────────────────────── */
+.project-nav-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--pixel-border-color);
+  background: var(--pixel-card-bg);
+  box-shadow: 2px 2px 0px var(--pixel-shadow-color);
+  cursor: pointer;
+  transition: none;
+  font-family: "VT323", monospace;
+  font-size: 0.8rem;
+  color: var(--pixel-text-primary);
+  padding: 0;
+  line-height: 1;
+}
+
+.project-nav-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--pixel-shadow-color);
+}
+
+.project-nav-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px 0px transparent;
+}
+
+.project-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.project-dot {
+  width: 8px; height: 8px;
+  border: 2px solid var(--pixel-border-color);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.project-dot.active { background: var(--pixel-accent-blue); }
+
+/* ─── Project iframe ────────────────────────────────────────────── */
+.project-iframe-wrap {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  background: #fff;
+  position: relative;
+}
+
+/* ─── Project layout ───────────────────────────────────────────── */
+.project-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  min-height: 0;
+}
+
+@media (min-width: 768px) {
+  .project-layout {
+    flex-direction: row;
+  }
+}
+
+.project-info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 0.5rem;
+}
+
+.project-name {
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .project-info {
+    width: 35%;
+    min-width: 0;
+  }
+}
+
+.project-preview {
+  flex: 1;
+  min-width: 0;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  position: relative;
+  z-index: 10001;
+  overflow: hidden;
+}
+
+.project-preview iframe {
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  border: none;
+  background: #ffffff;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+}
+
+.bento-cell-positioned {
+  position: relative;
+  z-index: 10000;
+}
+
+.project-info::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  opacity: 0.15;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .project-preview {
+    min-height: 0;
+  }
+}
+
+/* ─── Project title bar ────────────────────────────────────────── */
+.project-title-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.project-title-bar h2 {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.project-title-bar .project-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
 }

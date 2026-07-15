@@ -9,7 +9,7 @@ import { Meta, Title } from '@angular/platform-browser';
   imports: [RouterOutlet],
   template: `
     <div
-      class="overflow-hidden min-h-screen flex flex-col"
+      class="overflow-hidden h-screen flex flex-col"
       [attr.theme]="globalService.selectedTheme()"
     >
       <router-outlet />

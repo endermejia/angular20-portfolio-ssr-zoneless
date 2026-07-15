@@ -12,9 +12,7 @@ import { GlobalData } from '../../services';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
 
-@Pipe({
-  name: 'safeUrl',
-})
+@Pipe({ name: 'safeUrl' })
 export class SafeUrlPipe implements PipeTransform {
   private sanitizer = inject(DomSanitizer);
   transform(url: string | undefined): SafeResourceUrl {
@@ -22,61 +20,33 @@ export class SafeUrlPipe implements PipeTransform {
   }
 }
 
-@Pipe({
-  name: 'expDate',
-})
+@Pipe({ name: 'expDate' })
 export class ExpDatePipe implements PipeTransform {
   private global = inject(GlobalData);
   transform(isoStr: string | undefined): string {
     if (!isoStr) return '';
     const date = new Date(isoStr);
     const lang = this.global.selectedLanguage() === 'es' ? 'es-ES' : 'en-US';
-    return new Intl.DateTimeFormat(lang, {
-      month: 'short',
-      year: 'numeric',
-    }).format(date);
+    return new Intl.DateTimeFormat(lang, { month: 'short', year: 'numeric' }).format(date);
   }
 }
 
-@Pipe({
-  name: 'expDuration',
-})
+@Pipe({ name: 'expDuration' })
 export class ExpDurationPipe implements PipeTransform {
   private global = inject(GlobalData);
   transform(startStr: string, endStr?: string): string {
     const start = new Date(startStr);
     const end = endStr ? new Date(endStr) : new Date();
-
     const yearsDiff = end.getFullYear() - start.getFullYear();
     const monthsDiff = end.getMonth() - start.getMonth();
     let totalMonths = yearsDiff * 12 + monthsDiff;
-
     if (totalMonths < 1) totalMonths = 1;
-
     const years = Math.floor(totalMonths / 12);
     const months = totalMonths % 12;
-
     const isEs = this.global.selectedLanguage() === 'es';
-
     const parts = [];
-    if (years > 0) {
-      parts.push(
-        years === 1
-          ? isEs
-            ? '1 año'
-            : '1 yr'
-          : `${years} ${isEs ? 'años' : 'yrs'}`,
-      );
-    }
-    if (months > 0) {
-      parts.push(
-        months === 1
-          ? isEs
-            ? '1 mes'
-            : '1 mo'
-          : `${months} ${isEs ? 'meses' : 'mos'}`,
-      );
-    }
+    if (years > 0) parts.push(years === 1 ? (isEs ? '1 año' : '1 yr') : `${years} ${isEs ? 'años' : 'yrs'}`);
+    if (months > 0) parts.push(months === 1 ? (isEs ? '1 mes' : '1 mo') : `${months} ${isEs ? 'meses' : 'mos'}`);
     return parts.join(' ');
   }
 }
@@ -117,112 +87,53 @@ interface Project {
 
 @Component({
   selector: 'app-home',
-  imports: [
-    TranslatePipe,
-    SafeUrlPipe,
-    ExpDatePipe,
-    ExpDurationPipe,
-    ScrollRevealDirective,
-  ],
+  imports: [TranslatePipe, SafeUrlPipe, ExpDatePipe, ExpDurationPipe, ScrollRevealDirective],
   templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    class: 'flex grow overflow-auto',
-  },
+  host: { class: 'contents' },
 })
 export class HomeComponent {
   protected readonly github = signal('https://github.com/endermejia');
-  protected readonly linkedin = signal(
-    'https://www.linkedin.com/in/gabrimejia/',
-  );
-  protected readonly instagram = signal(
-    'https://www.instagram.com/gabri.mejia/',
-  );
-  protected readonly currentYear = new Date().getFullYear();
+  protected readonly linkedin = signal('https://www.linkedin.com/in/gabrimejia/');
+  protected readonly instagram = signal('https://www.instagram.com/gabri.mejia/');
 
   protected readonly global = inject(GlobalData);
 
-  // Windows 98 Window State Signals
-  private readonly minimizedProjects = signal<Set<string>>(new Set());
-  private readonly maximizedProjects = signal<Set<string>>(new Set());
-  private readonly closedProjects = signal<Set<string>>(new Set());
+  // Project Carousel State
+  protected readonly currentProjectIndex = signal(0);
 
-  protected isMinimized(projectName: string): boolean {
-    return this.minimizedProjects().has(projectName);
+  protected readonly currentProject = computed(() => {
+    const projs = this.projects();
+    return projs[this.currentProjectIndex() % projs.length];
+  });
+
+  protected nextProject(): void {
+    const total = this.projects().length;
+    this.currentProjectIndex.update((i) => (i + 1) % total);
   }
 
-  protected isMaximized(projectName: string): boolean {
-    return this.maximizedProjects().has(projectName);
+  protected prevProject(): void {
+    const total = this.projects().length;
+    this.currentProjectIndex.update((i) => (i - 1 + total) % total);
   }
 
-  protected isClosed(projectName: string): boolean {
-    return this.closedProjects().has(projectName);
+  protected goToProject(index: number): void {
+    this.currentProjectIndex.set(index);
   }
 
-  protected toggleMinimize(projectName: string, event?: Event): void {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
+  protected readonly totalYearsExperience = computed(() => {
+    const exps = this.experiences();
+    if (exps.length === 0) return 0;
+    const now = new Date();
+    let earliest = now;
+    for (const exp of exps) {
+      const start = new Date(exp.startDate);
+      if (start < earliest) earliest = start;
     }
-    const nextMin = new Set(this.minimizedProjects());
-    if (nextMin.has(projectName)) {
-      nextMin.delete(projectName);
-    } else {
-      nextMin.add(projectName);
-      // Un-maximize when minimizing
-      const nextMax = new Set(this.maximizedProjects());
-      nextMax.delete(projectName);
-      this.maximizedProjects.set(nextMax);
-    }
-    this.minimizedProjects.set(nextMin);
-  }
-
-  protected toggleMaximize(projectName: string, event?: Event): void {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    const nextMax = new Set(this.maximizedProjects());
-    if (nextMax.has(projectName)) {
-      nextMax.delete(projectName);
-    } else {
-      nextMax.add(projectName);
-      // Un-minimize when maximizing
-      const nextMin = new Set(this.minimizedProjects());
-      nextMin.delete(projectName);
-      this.minimizedProjects.set(nextMin);
-    }
-    this.maximizedProjects.set(nextMax);
-  }
-
-  protected closeWindow(projectName: string, event?: Event): void {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    const nextClosed = new Set(this.closedProjects());
-    nextClosed.add(projectName);
-    this.closedProjects.set(nextClosed);
-
-    // Reset maximize and minimize states upon closing
-    const nextMax = new Set(this.maximizedProjects());
-    nextMax.delete(projectName);
-    this.maximizedProjects.set(nextMax);
-
-    const nextMin = new Set(this.minimizedProjects());
-    nextMin.delete(projectName);
-    this.minimizedProjects.set(nextMin);
-  }
-
-  protected restoreWindow(projectName: string, event?: Event): void {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    const next = new Set(this.closedProjects());
-    next.delete(projectName);
-    this.closedProjects.set(next);
-  }
+    const years = now.getFullYear() - earliest.getFullYear();
+    const months = now.getMonth() - earliest.getMonth();
+    return months < 0 ? years - 1 : years;
+  });
 
   protected readonly experiences = signal<Experience[]>([
     {
@@ -232,14 +143,7 @@ export class HomeComponent {
       startDate: '2025-06-01',
       location: 'Principado de Asturias',
       descriptionKey: 'home.experience.inetum',
-      skills: [
-        'Angular 22',
-        'SSR',
-        'Zoneless',
-        'Angular Material',
-        'i18n',
-        'Signals',
-      ],
+      skills: ['Angular 22', 'SSR', 'Zoneless', 'Angular Material', 'i18n', 'Signals'],
     },
     {
       company: 'CONVOTIS Iberia',
@@ -283,45 +187,19 @@ export class HomeComponent {
     },
   ]);
 
-  protected readonly showAllExperiences = signal(false);
-
-  protected readonly visibleExperiences = computed(() => {
-    return this.showAllExperiences()
-      ? this.experiences()
-      : this.experiences().slice(0, 3);
-  });
-
-  protected toggleShowAllExperiences(): void {
-    this.showAllExperiences.update((val) => !val);
-  }
-
-  protected readonly showAllProjects = signal(false);
-
-  protected readonly visibleProjects = computed(() => {
-    return this.showAllProjects()
-      ? this.projects()
-      : this.projects().slice(0, 3);
-  });
-
-  protected toggleShowAllProjects(): void {
-    this.showAllProjects.update((val) => !val);
-  }
-
   protected readonly certifications = signal<Certification[]>([
     {
       title: 'Legacy Responsive Web Design',
       issuer: 'freeCodeCamp',
       issueDate: 'Oct 2020',
-      credentialUrl:
-        'https://www.freecodecamp.org/certification/endermejia/responsive-web-design',
+      credentialUrl: 'https://www.freecodecamp.org/certification/endermejia/responsive-web-design',
       skills: ['HTML', 'CSS', 'Responsive Design'],
     },
     {
       title: 'JavaScript Algorithms and Data Structures',
       issuer: 'freeCodeCamp',
       issueDate: 'Oct 2020',
-      credentialUrl:
-        'https://www.freecodecamp.org/certification/endermejia/javascript-algorithms-and-data-structures',
+      credentialUrl: 'https://www.freecodecamp.org/certification/endermejia/javascript-algorithms-and-data-structures',
       skills: ['JavaScript', 'Algorithms', 'Data Structures'],
     },
   ]);
@@ -383,10 +261,7 @@ export class HomeComponent {
       tags: [
         { name: 'Next.js', icon: 'https://cdn.simpleicons.org/nextdotjs' },
         { name: 'React', icon: 'https://cdn.simpleicons.org/react' },
-        {
-          name: 'Tailwind CSS',
-          icon: 'https://cdn.simpleicons.org/tailwindcss',
-        },
+        { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss' },
         { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript' },
       ],
     },
@@ -397,10 +272,7 @@ export class HomeComponent {
       siteName: 'sergio-solbes.vercel.app',
       tags: [
         { name: 'Astro', icon: 'https://cdn.simpleicons.org/astro' },
-        {
-          name: 'Tailwind CSS',
-          icon: 'https://cdn.simpleicons.org/tailwindcss',
-        },
+        { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss' },
         { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript' },
       ],
     },
@@ -412,10 +284,7 @@ export class HomeComponent {
       tags: [
         { name: 'Next.js', icon: 'https://cdn.simpleicons.org/nextdotjs' },
         { name: 'React', icon: 'https://cdn.simpleicons.org/react' },
-        {
-          name: 'Tailwind CSS',
-          icon: 'https://cdn.simpleicons.org/tailwindcss',
-        },
+        { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss' },
         { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript' },
       ],
     },
@@ -434,16 +303,9 @@ export class HomeComponent {
   }
 
   protected toggleExp(exp: Experience, event?: Event): void {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    if (event) { event.preventDefault(); event.stopPropagation(); }
     const next = new Set(this.expandedExps());
-    if (next.has(exp)) {
-      next.delete(exp);
-    } else {
-      next.add(exp);
-    }
+    if (next.has(exp)) { next.delete(exp); } else { next.add(exp); }
     this.expandedExps.set(next);
   }
 
@@ -455,25 +317,17 @@ export class HomeComponent {
     }
   }
 
-  protected readonly langIndex = computed(() =>
-    this.global.selectedLanguage() === 'en' ? 0 : 1,
-  );
+  protected readonly langIndex = computed(() => this.global.selectedLanguage() === 'en' ? 0 : 1);
 
   protected onLangChange(index: number): void {
     const lang = index === 0 ? 'en' : 'es';
-    if (this.global.selectedLanguage() !== lang) {
-      this.global.switchLanguage();
-    }
+    if (this.global.selectedLanguage() !== lang) { this.global.switchLanguage(); }
   }
 
-  protected readonly themeIndex = computed(() =>
-    this.global.selectedTheme() === 'light' ? 0 : 1,
-  );
+  protected readonly themeIndex = computed(() => this.global.selectedTheme() === 'light' ? 0 : 1);
 
   protected onThemeChange(index: number): void {
     const theme = index === 0 ? 'light' : 'dark';
-    if (this.global.selectedTheme() !== theme) {
-      this.global.switchTheme();
-    }
+    if (this.global.selectedTheme() !== theme) { this.global.switchTheme(); }
   }
 }
