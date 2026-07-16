@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1440px;
+  --breakpoint-desktop-lg: 1600px;
+}
+
 :root {
   /* Pixel Art Theme Color Tokens - Light/Retro Console Style */
   --pixel-bg: #efeff2; /* Clean console light grey */
@@ -100,7 +106,7 @@ h1 {
     font-size: 2.75rem !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   h1 {
     font-size: 3.5rem !important;
   }
@@ -114,7 +120,7 @@ h2 {
     font-size: 2rem !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   h2 {
     font-size: 2.5rem !important;
   }
@@ -123,7 +129,7 @@ h2 {
 h3 {
   font-size: 1.5rem !important;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   h3 {
     font-size: 2rem !important;
   }
@@ -132,7 +138,7 @@ h3 {
 h4 {
   font-size: 1.5rem !important;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   h4 {
     font-size: 2rem !important;
   }
@@ -142,7 +148,7 @@ h5,
 h6 {
   font-size: 1.25rem !important;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   h5,
   h6 {
     font-size: 1.5rem !important;
@@ -436,7 +442,7 @@ article[role="button"]:active {
 }
 
 /* Desktop: celdas con scroll interno */
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   .bento-viewport {
     overflow-y: hidden;
     padding: 1rem;
@@ -459,7 +465,7 @@ article[role="button"]:active {
 }
 
 /* Desktop: 4 columnas */
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   .bento-grid {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto 1.8fr;
@@ -469,7 +475,7 @@ article[role="button"]:active {
 }
 
 /* Medium screens scaling */
-@media (min-width: 1200px) and (max-width: 1440px) {
+@media (min-width: 1440px) and (max-width: 1600px) {
   .bento-viewport {
     padding: 0.4rem;
   }
@@ -504,7 +510,7 @@ article[role="button"]:active {
 }
 
 /* Desktop: celdas con scroll interno */
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   .bento-cell {
     overflow-y: auto;
     overflow-x: hidden;
@@ -673,7 +679,7 @@ article[role="button"]:active {
   overflow: hidden;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1439px) {
   .project-preview {
     min-height: 400px;
     height: 400px;
