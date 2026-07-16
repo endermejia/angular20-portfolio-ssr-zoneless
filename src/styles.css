@@ -202,6 +202,42 @@ h6 {
   z-index: 1;
 }
 
+/* ─── Marquee Titles ────────────────────────────────────────────── */
+.marquee-title {
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-title > span {
+  display: inline-block;
+}
+
+.marquee-title.marquee-active > span:first-child {
+  visibility: hidden;
+}
+
+.marquee-track {
+  display: inline-flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.marquee-track > span {
+  display: inline-block;
+  padding-right: 4rem;
+}
+
+.marquee-title.marquee-active .marquee-track {
+  animation: marquee-scroll 12s linear infinite;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* ─── Retro Buttons (NES-style) ─────────────────────────────────── */
 .pixel-btn {
   display: inline-flex !important;
@@ -442,11 +478,13 @@ article[role="button"]:active {
 }
 
 /* Medium screens scaling */
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1440px) {
   .bento-viewport {
-    padding: 0.5rem;
-    transform: scale(0.92);
-    transform-origin: top center;
+    padding: 0.4rem;
+  }
+
+  .bento-grid {
+    gap: 0.5rem;
   }
   
   .bento-cell {
@@ -460,7 +498,18 @@ article[role="button"]:active {
   box-shadow: 6px 6px 0px var(--pixel-shadow-color);
   position: relative;
   min-height: 0;
-  transition: none;
+}
+
+@media (hover: hover) {
+  .bento-cell:hover::before,
+  .bento-cell:hover::after {
+    animation: corner-pulse 0.85s steps(4) infinite;
+  }
+}
+
+@keyframes corner-pulse {
+  0%, 100% { width: 8px; height: 8px; opacity: 0.5; }
+  50% { width: 12px; height: 12px; opacity: 1; }
 }
 
 @media (min-width: 768px) {

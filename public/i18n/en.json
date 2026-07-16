@@ -9,7 +9,7 @@
   "home.experience.ricoh": "As a Senior Frontend Developer at RICOH, I led projects focused on the Principality of Asturias, working closely with the development team to design, implement, and maintain high-quality solutions. As an Angular expert (mostly versions 12+), I used technologies such as HTML, CSS, and TypeScript to build intuitive and engaging user interfaces. I also played a key role in technical decision-making and mentoring other team members.",
   "home.experience.nttdata": "As a Frontend Developer at NTT DATA, I contributed to significant projects for clients such as Santa Lucía and Orange. I was responsible for implementing and improving user interfaces using Angular (versions 9+). Working closely in a multidisciplinary team and participating in the development of effective, high-quality solutions.",
   "home.experience.inetum": "Development of critical projects for the Principality of Asturias using Angular 22, focusing on innovation and high performance. Implementation of modern architectures applying strategies without Zone.js (zoneless), SSR, and incremental hydration to optimize loading and user experience.\nExtensive use of the latest framework tools (Signals) and UI libraries (Angular Material) for creating accessible (a11y) and internationalization-ready (i18n) interfaces. Leading the deployment of efficient technological solutions for public administration.",
-  "home.certifications.title": "Licenses & certifications",
+  "home.certifications.title": "Certifications",
   "home.certifications.show_credential": "Show credential",
   "home.projects.title": "Projects",
   "home.contact.title": "Contact",

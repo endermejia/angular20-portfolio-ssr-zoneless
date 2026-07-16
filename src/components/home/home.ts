@@ -11,6 +11,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { GlobalData } from '../../services';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
+import { MarqueeOnOverflowDirective } from '../../directives/marquee-on-overflow.directive';
 
 @Pipe({ name: 'safeUrl' })
 export class SafeUrlPipe implements PipeTransform {
@@ -87,7 +88,7 @@ interface Project {
 
 @Component({
   selector: 'app-home',
-  imports: [TranslatePipe, SafeUrlPipe, ExpDatePipe, ExpDurationPipe, ScrollRevealDirective],
+  imports: [TranslatePipe, SafeUrlPipe, ExpDatePipe, ExpDurationPipe, ScrollRevealDirective, MarqueeOnOverflowDirective],
   templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'contents' },
