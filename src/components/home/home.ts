@@ -11,7 +11,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { GlobalData } from '../../services';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
-import { MarqueeOnOverflowDirective } from '../../directives/marquee-on-overflow.directive';
 
 @Pipe({ name: 'safeUrl' })
 export class SafeUrlPipe implements PipeTransform {
@@ -88,7 +87,7 @@ interface Project {
 
 @Component({
   selector: 'app-home',
-  imports: [TranslatePipe, SafeUrlPipe, ExpDatePipe, ExpDurationPipe, ScrollRevealDirective, MarqueeOnOverflowDirective],
+  imports: [TranslatePipe, SafeUrlPipe, ExpDatePipe, ExpDurationPipe, ScrollRevealDirective],
   templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'contents' },
@@ -101,7 +100,7 @@ export class HomeComponent {
   protected readonly global = inject(GlobalData);
 
   // Project Carousel State
-  protected readonly currentProjectIndex = signal(0);
+  protected readonly currentProjectIndex = signal(2);
 
   protected readonly currentProject = computed(() => {
     const projs = this.projects();
